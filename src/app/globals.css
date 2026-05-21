@@ -255,3 +255,24 @@ html {
     @apply font-sans;
   }
 }
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+/* Enable custom clip-path animation on the new root */
+::view-transition-new(root) {
+  clip-path: var(--mode-vt-clip-from, circle(0px at 50% 50%));
+  animation: mode-reveal var(--mode-vt-duration, 400ms) ease-in-out forwards;
+}
+
+@keyframes mode-reveal {
+  from {
+    clip-path: var(--mode-vt-clip-from, circle(0px at 50% 50%));
+  }
+  to {
+    clip-path: circle(141.4% at 50% 50%);
+  }
+}

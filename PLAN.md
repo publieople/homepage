@@ -20,50 +20,52 @@
 
 ## Phase 计划
 
-### Phase 0: 项目脚手架
+### Phase 0: 项目脚手架（已完成）
+### Phase 1: 主题系统 + 页面布局（已完成）
+### Phase 2: 内容组件 + 部署（已完成）
 
-**交付：`npm run dev` 能跑的白页**
+---
 
-任务：
-- [ ] Next.js 16 初始化（`npx create-next-app@latest`）
-- [ ] shadcn/ui 初始化（`npx shadcn@latest init`）
-- [ ] 添加 magicui 所需组件（Bento Grid, Number Ticker, Animated Gradient Text）
-- [ ] 配置 next/font（Source Sans 3 + Geist Mono）
-- [ ] globals.css 骨架 + Tailwind v4 配置
-- [ ] .gitignore 更新（node_modules 等）
-- [ ] 更新 AGENTS.md 项目上下文
-- [ ] git commit & push
-- 验证：`npm run dev` → localhost 能看到 Next.js 默认页面
+### Phase 2.1: 亮暗模式
 
-### Phase 1: 主题系统 + 页面布局骨架
+**交付：亮/暗色可切换，切换平滑**
 
-**交付：有 Stripe 风格的完整页面骨架，主题切换器可工作**
+- [ ] Stripe dark 色板（深海军蓝背景，白色文字，紫色点缀微调）
+- [ ] data-mode 维度 CSS 变量（与 data-theme 正交）
+- [ ] ModeProvider（读取 system preference + localStorage 持久化）
+- [ ] ModeToggle 组件（太阳/月亮图标按钮）
+- [ ] 全局 CSS transition（background-color, color, border-color 等）
+- [ ] Header 中集成切换按钮
+- 验证：browser_vision 暗色截图确认
 
-任务：
-- [ ] Stripe 设计系统 CSS 变量全量（颜色、字体、圆角、阴影、间距）
-- [ ] ThemeProvider 组件（读取 localStorage → 设置 data-theme → 防 FOUC）
-- [ ] theme-switcher 组件（下拉选择器，支持 Stripe 首发）
-- [ ] 页面布局骨架（Header 导航 + 各 Section 占位 + Footer）
-- [ ] 平滑滚动导航（点击锚点 smooth scroll）
-- [ ] 响应式布局（移动端汉堡菜单）
-- [ ] framer-motion 滚动入场动画
-- 验证：`browser_vision` 截图确认 Stripe 风格 + 主题切换正常
+### Phase 2.2: Hero 动效增强
 
-### Phase 2: 内容填充 + 部署
+**交付：Hero 区有视觉冲击力**
 
-**交付：线上可访问的个人主页**
+- [ ] magicui Particles 组件 → Hero 背景
+- [ ] 标题 Animated Gradient Text（紫→粉→蓝渐变）
+- [ ] 头像悬浮微动（framer-motion hover rotate/Y）
+- [ ] 向下滚动指示器 pulse 动画
+- 验证：browser_vision 确认视觉效果
 
-任务：
-- [ ] Hero 组件（头像 + 名字 + 定位语 + 导航按钮）
-- [ ] About 组件（简介 + 核心理念 + 项目简介）
-- [ ] Projects 组件（3 张 magicui Bento Grid 卡片）
-- [ ] Blog 组件（3 篇精选 + Notion 封面/摘要）
-- [ ] Resume 区（链到 GitHub resume）
-- [ ] Contact 区（GitHub/B站/Email 图标链接）
-- [ ] Footer（版权 + 小彩蛋）
-- [ ] 头像从 Windows 导入到 public/ 目录
-- [ ] GitHub Actions deploy.yml（构建 → 部署到 pages）
-- 验证：`browser_vision` 全页面截图确认 + GitHub Pages 可访问
+### Phase 2.3: Bento Grid + 交互升级
+
+**交付：Projects 区焕然一新，全页交互提升**
+
+- [ ] magicui BentoGrid 组件复制
+- [ ] Projects 区改用 Bento Grid 布局（一大两小）
+- [ ] 卡片 hover 动效（上浮 + 紫色 glow border）
+- [ ] 全页 section enter/exit 动画增强
+- 验证：browser_vision 截图确认
+
+### Phase 2.4: 打磨 + 部署
+
+**交付：线上效果满意**
+
+- [ ] 深色背景段落（About 或 Resume 安排深色区）
+- [ ] 动画性能检查（60fps 无卡顿）
+- [ ] git push → Actions 自动部署
+- 验证：www.for-people.cn 可访问，效果满意
 
 ## 关键技术决策
 

@@ -46,6 +46,12 @@ export default function RootLayout({
                 try {
                   var theme = localStorage.getItem('publieople-theme') || 'stripe';
                   document.documentElement.dataset.theme = theme;
+                  
+                  var mode = localStorage.getItem('publieople-mode');
+                  if (!mode) {
+                    mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
+                  document.documentElement.dataset.mode = mode;
                 } catch(e) {}
               })();
             `,

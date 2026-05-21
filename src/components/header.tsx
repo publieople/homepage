@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { ModeToggle } from "@/components/mode-toggle";
 import { Menu, X } from "lucide-react";
 
 const navItems = [
@@ -63,7 +64,8 @@ export function Header() {
               {item.label}
             </a>
           ))}
-          <div className="ml-4">
+          <div className="flex items-center gap-1">
+            <ModeToggle />
             <ThemeSwitcher />
           </div>
         </nav>

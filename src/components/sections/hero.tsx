@@ -5,40 +5,68 @@ import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { ArrowDown, BookOpen, FileText } from "lucide-react";
 import { GithubIcon } from "@/components/sections/github-icon";
+import { Particles } from "@/components/ui/particles";
+import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen flex items-center justify-center relative px-6"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden px-6"
     >
-      {/* Subtle gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-primary/[0.03] via-transparent to-transparent pointer-events-none" />
+      {/* Particles background */}
+      <Particles
+        className="absolute inset-0"
+        quantity={80}
+        color="#533afd"
+        vx={0.1}
+        vy={0.1}
+      />
 
-      <div className="relative text-center max-w-2xl mx-auto pt-20 pb-16">
-        {/* Avatar */}
+      {/* Gradient fade over particles for readability */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background pointer-events-none" />
+
+      <div className="relative z-10 text-center mx-auto max-w-2xl pt-20 pb-16">
+        {/* Avatar with hover animation */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <Avatar className="size-24 mx-auto ring-2 ring-primary/20 ring-offset-4 ring-offset-background">
-            <AvatarImage src="/avatar.jpg" alt="人民公仆" />
-            <AvatarFallback>PP</AvatarFallback>
-          </Avatar>
+          <motion.div
+            whileHover={{ scale: 1.08, rotate: -3 }}
+            transition={{ type: "spring", stiffness: 300, damping: 12 }}
+            className="inline-block"
+          >
+            <Avatar className="size-24 ring-2 ring-primary/20 ring-offset-4 ring-offset-background transition-shadow duration-300 hover:ring-primary/50 hover:shadow-[0_0_30px_-5px] hover:shadow-primary/30">
+              <AvatarImage src="/avatar.jpg" alt="人民公仆" />
+              <AvatarFallback>PP</AvatarFallback>
+            </Avatar>
+          </motion.div>
         </motion.div>
 
-        {/* Name */}
-        <motion.h1
+        {/* Gradient Name Title */}
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1] text-foreground"
-          style={{ letterSpacing: "-0.03em" }}
         >
-          人民公仆
-        </motion.h1>
+          <h1
+            className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1]"
+            style={{ letterSpacing: "-0.03em" }}
+          >
+            <AnimatedGradientText
+              speed={2}
+              colorFrom="#533afd"
+              colorTo="#ec4899"
+              className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1]"
+            >
+              人民公仆
+            </AnimatedGradientText>
+          </h1>
+        </motion.div>
+
         <motion.p
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -95,7 +123,7 @@ export function Hero() {
           </Button>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll indicator with pulse ring */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -113,7 +141,10 @@ export function Hero() {
             <span className="text-xs font-[400] tracking-wider uppercase">
               向下滚动
             </span>
-            <ArrowDown className="size-4 animate-bounce" />
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full animate-ping bg-primary/20" />
+              <ArrowDown className="relative size-4 animate-bounce" />
+            </div>
           </a>
         </motion.div>
       </div>

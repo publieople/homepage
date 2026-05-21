@@ -54,7 +54,7 @@ export function About() {
             },
           ].map((item, i) => (
             <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
-              <Card className="group border-border/60 hover:border-primary/30 transition-colors h-full cursor-pointer">
+              <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px] hover:shadow-primary/15">
                 <CardContent className="p-6">
                   <h3 className="text-sm font-[400] text-foreground mb-2 group-hover:text-primary transition-colors">
                     {item.label}

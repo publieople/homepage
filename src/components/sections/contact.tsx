@@ -61,7 +61,7 @@ export function Contact() {
               href={link.href}
               target="_blank"
               rel="noreferrer"
-              className="group flex flex-col items-center gap-2 p-6 rounded-lg border border-border/60 hover:border-primary/30 transition-all hover:shadow-[rgba(50,50,93,0.25)_0px_30px_45px_-30px,rgba(0,0,0,0.1)_0px_18px_36px_-18px] min-w-[140px]"
+              className="group flex flex-col items-center gap-2 p-6 rounded-lg border border-border/60 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/15 min-w-[140px]"
             >
               <link.icon className="size-6 text-muted-foreground/60 group-hover:text-primary transition-colors" />
               <span className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors">

@@ -61,7 +61,7 @@ export function Blog() {
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
               <a href={post.href} target="_blank" rel="noreferrer">
-                <Card className="group border-border/60 hover:border-primary/30 transition-all cursor-pointer">
+                <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px] hover:shadow-primary/15">
                   <CardContent className="p-5 flex items-center justify-between">
                     <div className="min-w-0">
                       <h3 className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors truncate">

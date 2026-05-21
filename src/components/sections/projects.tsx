@@ -1,7 +1,8 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { cn } from "@/lib/utils";
+import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
 
@@ -11,25 +12,28 @@ const projects = [
     desc: "非盈利内容企划，致力于让通用知识触手可及。团队 8 人，保持每两周一篇的深度输出。",
     tags: ["内容创作", "团队管理"],
     href: "https://blog.for-people.cn/",
+    span: "md:col-span-2 md:row-span-2",
   },
   {
     title: "电脑高手速成班",
     desc: "面向新手的结构化技术教程系列。从工具使用到编程思维，帮助零基础学习者建立技术自信。",
     tags: ["教程", "技术写作"],
     href: "https://www.notion.so/1a966ad7c9c483cf839081223d50a9fd",
+    span: "md:col-span-1",
   },
   {
     title: "Publieople's Blog",
     desc: "个人博客，记录技术探索、工具推荐和项目心得。Notion 驱动，分享即收藏。",
     tags: ["博客", "Notion"],
     href: "https://blog.for-people.cn/",
+    span: "md:col-span-1",
   },
 ];
 
 export function Projects() {
   return (
     <section id="projects" className="py-28 px-6 bg-muted/30">
-      <div className="mx-auto max-w-4xl">
+      <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -44,7 +48,7 @@ export function Projects() {
           </h2>
         </motion.div>
 
-        <div className="grid sm:grid-cols-3 gap-4">
+        <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-auto gap-4 md:gap-5">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
@@ -52,10 +56,24 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={project.span}
             >
-              <a href={project.href} target="_blank" rel="noreferrer">
-                <Card className="group border-border/60 hover:border-primary/30 transition-all h-full cursor-pointer hover:shadow-[rgba(50,50,93,0.25)_0px_30px_45px_-30px,rgba(0,0,0,0.1)_0px_18px_36px_-18px]">
-                  <CardContent className="p-6 flex flex-col h-full">
+              <a
+                href={project.href}
+                target="_blank"
+                rel="noreferrer"
+                className="group block h-full"
+              >
+                <div
+                  className={cn(
+                    "relative flex flex-col h-full rounded-xl overflow-hidden",
+                    "bg-card border border-border/60",
+                    "transition-all duration-300",
+                    // Hover lift + glow
+                    "hover:-translate-y-1 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/20 hover:border-primary/30"
+                  )}
+                >
+                  <div className="p-6 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-3">
                       <h3 className="text-base font-[400] text-foreground group-hover:text-primary transition-colors">
                         {project.title}
@@ -76,13 +94,14 @@ export function Projects() {
                         </Badge>
                       ))}
                     </div>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
               </a>
             </motion.div>
           ))}
-        </div>
+        </BentoGrid>
       </div>
     </section>
   );
 }
+

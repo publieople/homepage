@@ -26,7 +26,7 @@ export function ResumeSection() {
           </p>
           <Button asChild size="lg">
             <a
-              href="https://github.com/publieople/resume"
+              href="https://visiky.github.io/resume?user=publieople"
               target="_blank"
               rel="noreferrer"
             >

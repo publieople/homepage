@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowDown, BookOpen, FileText } from "lucide-react";
 import { GithubIcon } from "@/components/sections/github-icon";
 import { Particles } from "@/components/ui/particles";
-import { AnimatedGradientText } from "@/components/ui/animated-gradient-text";
+import { TypingAnimation } from "@/components/ui/typing-animation";
 
 export function Hero() {
   return (
@@ -53,17 +53,10 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.1 }}
         >
           <h1
-            className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1]"
+            className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1] text-foreground"
             style={{ letterSpacing: "-0.03em" }}
           >
-            <AnimatedGradientText
-              speed={2}
-              colorFrom="#533afd"
-              colorTo="#ec4899"
-              className="text-4xl sm:text-5xl md:text-6xl font-[300] tracking-tight leading-[1.1]"
-            >
-              人民公仆
-            </AnimatedGradientText>
+            人民公仆
           </h1>
         </motion.div>
 
@@ -77,15 +70,21 @@ export function Hero() {
           /publieople/
         </motion.p>
 
-        {/* Tagline */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+        {/* Tagline with typewriter */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-6 text-base sm:text-lg font-[300] text-muted-foreground leading-relaxed max-w-lg mx-auto"
         >
-          大学生 · 内容创作者 · Vibe Coder
-        </motion.p>
+          <TypingAnimation
+            className="mt-6 text-base sm:text-lg font-[300] text-muted-foreground leading-relaxed mx-auto block text-center"
+            duration={50}
+            startOnView={false}
+            showCursor={true}
+          >
+            大学生 · 内容创作者 · Vibe Coder
+          </TypingAnimation>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}

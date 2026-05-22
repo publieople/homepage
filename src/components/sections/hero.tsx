@@ -78,12 +78,14 @@ export function Hero() {
         >
           <TypingAnimation
             className="mt-6 text-base sm:text-lg font-[300] text-muted-foreground leading-relaxed mx-auto block text-center"
-            duration={50}
+            words={["大学生", "内容创作者", "Vibe Coder"]}
+            duration={120}
+            pauseDelay={2000}
+            loop={true}
             startOnView={false}
             showCursor={true}
-          >
-            大学生 · 内容创作者 · Vibe Coder
-          </TypingAnimation>
+            cursorStyle="line"
+          />
         </motion.div>
 
         <motion.p

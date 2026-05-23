@@ -3,10 +3,21 @@
 import { motion } from "framer-motion";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
-import { ArrowDown, BookOpen, FileText } from "lucide-react";
+import { ArrowDown, BookOpen, FileText, Terminal, Globe } from "lucide-react";
 import { GithubIcon } from "@/components/sections/github-icon";
+import {
+  HermesAgent,
+  Notion,
+  OpenClaw,
+  Github,
+  ComfyUI,
+} from "@lobehub/icons";
+import { SiArchlinux, SiDocker } from "@icons-pack/react-simple-icons";
+import { QuickerIcon } from "@/components/sections/quicker-icon";
+import { AdobePhotoshopIcon } from "@/components/sections/adobe-photoshop-icon";
 import { Particles } from "@/components/ui/particles";
 import { TypingAnimation } from "@/components/ui/typing-animation";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 
 export function Hero() {
   return (
@@ -27,23 +38,58 @@ export function Hero() {
       <div className="absolute inset-0 bg-gradient-to-b from-background/70 via-background/30 to-background pointer-events-none" />
 
       <div className="relative z-10 text-center mx-auto max-w-2xl pt-20 pb-16">
-        {/* Avatar with hover animation */}
+        {/* Avatar + orbiting circles — always centered together */}
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.6 }}
           className="mb-8"
         >
-          <motion.div
-            whileHover={{ scale: 1.08, rotate: -3 }}
-            transition={{ type: "spring", stiffness: 300, damping: 12 }}
-            className="inline-block"
-          >
-            <Avatar className="size-24 ring-2 ring-primary/20 ring-offset-4 ring-offset-background transition-shadow duration-300 hover:ring-primary/50 hover:shadow-[0_0_30px_-5px] hover:shadow-primary/30">
-              <AvatarImage src="/avatar.jpg" alt="人民公仆" />
-              <AvatarFallback>PP</AvatarFallback>
-            </Avatar>
-          </motion.div>
+          <div className="relative size-24 flex items-center justify-center mx-auto">
+            {/* Orbiting tech stack — centered on this fixed-size container */}
+            <div className="absolute pointer-events-none" style={{ left: 'calc(50% - 16px)', top: 'calc(50% - 16px)' }}>
+              <div className="relative w-0 h-0">
+                <OrbitingCircles
+                  radius={140}
+                  duration={20}
+                  speed={1.2}
+                  path={false}
+                  iconSize={32}
+                >
+                  <HermesAgent size={32} className="text-primary/60" />
+                  <Notion size={32} className="text-primary/60" />
+                  <OpenClaw size={32} className="text-primary/60" />
+                  <Github size={32} className="text-primary/60" />
+                  <SiArchlinux size={32} color="currentColor" className="text-primary/60" />
+                </OrbitingCircles>
+                <OrbitingCircles
+                  radius={220}
+                  duration={28}
+                  reverse
+                  speed={0.8}
+                  path={false}
+                  iconSize={32}
+                >
+                  <ComfyUI size={32} className="text-muted-foreground/30" />
+                  <SiDocker size={32} color="currentColor" className="text-muted-foreground/30" />
+                  <AdobePhotoshopIcon className="size-8 text-muted-foreground/30" />
+                  <QuickerIcon className="size-8 text-muted-foreground/30" />
+                  <Terminal className="size-8 text-muted-foreground/30" />
+                  <Globe className="size-8 text-muted-foreground/30" />
+                </OrbitingCircles>
+              </div>
+            </div>
+
+            <motion.div
+              whileHover={{ scale: 1.08, rotate: -3 }}
+              transition={{ type: "spring", stiffness: 300, damping: 12 }}
+            >
+              <Avatar className="size-24 ring-2 ring-primary/20 ring-offset-4 ring-offset-background transition-shadow duration-300 hover:ring-primary/50 hover:shadow-[0_0_30px_-5px] hover:shadow-primary/30">
+                <AvatarImage src="/avatar.jpg" alt="人民公仆" />
+                <AvatarFallback>PP</AvatarFallback>
+              </Avatar>
+            </motion.div>
+          </div>
         </motion.div>
 
         {/* Gradient Name Title */}

@@ -48,13 +48,14 @@ export function Hero() {
           <div className="relative size-24 flex items-center justify-center mx-auto">
             {/* Orbiting tech stack — centered on this fixed-size container */}
             <div className="absolute pointer-events-none" style={{ left: 'calc(50% - 16px)', top: 'calc(50% - 16px)' }}>
-              <div className="relative w-0 h-0">
+              <div className="relative w-0 h-0" style={{ transform: 'rotate3d(1, 1, 0, 55deg)', transformStyle: 'preserve-3d' }}>
                 <OrbitingCircles
                   radius={140}
                   duration={20}
                   speed={1.2}
                   path={false}
                   iconSize={32}
+                  ring
                 >
                   <HermesAgent size={32} className="text-primary/60" />
                   <Notion size={32} className="text-primary/60" />
@@ -69,6 +70,7 @@ export function Hero() {
                   speed={0.8}
                   path={false}
                   iconSize={32}
+                  ring
                 >
                   <ComfyUI size={32} className="text-muted-foreground/30" />
                   <SiDocker size={32} color="currentColor" className="text-muted-foreground/30" />

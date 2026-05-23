@@ -12,6 +12,12 @@ export interface OrbitingCirclesProps extends React.HTMLAttributes<HTMLDivElemen
   path?: boolean
   iconSize?: number
   speed?: number
+  /** Enable planetary-ring 3D tilt effect */
+  ring?: boolean
+  /** Ring tilt angle in degrees (default 55) */
+  ringAngle?: number
+  /** Ring tilt axis as [x, y, z] vector (default [1, -1, 0] for top-left→bottom-right) */
+  ringAxis?: [number, number, number]
 }
 
 export function OrbitingCircles({
@@ -23,9 +29,13 @@ export function OrbitingCircles({
   path = true,
   iconSize = 30,
   speed = 1,
+  ring = false,
+  ringAngle = 55,
+  ringAxis = [1, 1, 0],
   ...props
 }: OrbitingCirclesProps) {
   const calculatedDuration = duration / speed
+
   return (
     <>
       {path && (
@@ -53,16 +63,28 @@ export function OrbitingCircles({
                 "--radius": radius,
                 "--angle": angle,
                 "--icon-size": `${iconSize}px`,
+                transformStyle: "preserve-3d",
               } as React.CSSProperties
             }
             className={cn(
               `animate-orbit absolute flex size-(--icon-size) transform-gpu items-center justify-center rounded-full`,
               { "[animation-direction:reverse]": reverse },
-              className
+              className,
             )}
             {...props}
           >
-            {child}
+            {ring ? (
+              <div
+                style={{
+                  transform: `rotate3d(${ringAxis[0]}, ${ringAxis[1]}, ${ringAxis[2]}, ${-ringAngle}deg)`,
+                  transformStyle: "preserve-3d",
+                }}
+              >
+                {child}
+              </div>
+            ) : (
+              child
+            )}
           </div>
         )
       })}

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Source_Sans_3, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/hooks/use-theme";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 
 const sourceSans = Source_Sans_3({
@@ -59,7 +60,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen font-sans antialiased">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          <ScrollProgress className="top-[65px]" />
+          {children}
+        </ThemeProvider>
       </body>
     </html>
   );

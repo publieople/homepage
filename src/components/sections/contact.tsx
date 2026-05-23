@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, ExternalLink } from "lucide-react";
+import { Mail } from "lucide-react";
 import { GithubIcon } from "@/components/sections/github-icon";
+import { MagicCard } from "@/components/ui/magic-card";
 
 const links = [
   {
@@ -56,23 +57,41 @@ export function Contact() {
           className="flex flex-wrap items-center justify-center gap-6"
         >
           {links.map((link) => (
-            <a
+            <MagicCard
               key={link.label}
-              href={link.href}
-              target="_blank"
-              rel="noreferrer"
-              className="group flex flex-col items-center gap-2 p-6 rounded-lg border border-border/60 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/15 min-w-[140px]"
+              className="rounded-2xl cursor-pointer min-w-[140px]"
+              gradientColor="#262626"
+              gradientFrom="#9E7AFF"
+              gradientTo="#FE8BBB"
             >
-              <link.icon className="size-6 text-muted-foreground/60 group-hover:text-primary transition-colors" />
-              <span className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors">
-                {link.label}
-              </span>
-              <span className="text-[10px] font-[300] text-muted-foreground/50">
-                {link.desc}
-              </span>
-            </a>
+              <a
+                href={link.href}
+                target="_blank"
+                rel="noreferrer"
+                className="flex flex-col items-center gap-2 p-6"
+              >
+                <link.icon className="size-6 text-muted-foreground/60 group-hover:text-primary transition-colors" />
+                <span className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors">
+                  {link.label}
+                </span>
+                <span className="text-[10px] font-[300] text-muted-foreground/50">
+                  {link.desc}
+                </span>
+              </a>
+            </MagicCard>
           ))}
         </motion.div>
+
+        {/* Signature */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 text-center text-[10px] font-[300] text-muted-foreground/30"
+        >
+          基于 Next.js + Tailwind CSS 用心构建 · © {new Date().getFullYear()} Publieople
+        </motion.p>
       </div>
     </section>
   );

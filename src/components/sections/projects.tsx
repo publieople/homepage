@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
+import { MagicCard } from "@/components/ui/magic-card";
 
 const projects = [
   {
@@ -13,6 +14,7 @@ const projects = [
     tags: ["内容创作", "团队管理"],
     href: "https://blog.for-people.cn/",
     span: "md:col-span-2 md:row-span-2",
+    gradient: true,
   },
   {
     title: "电脑高手速成班",
@@ -58,45 +60,59 @@ export function Projects() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={project.span}
             >
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block h-full"
+              <MagicCard
+                className="h-full rounded-2xl cursor-pointer"
+                gradientColor="#262626"
+                gradientFrom="#9E7AFF"
+                gradientTo="#FE8BBB"
               >
-                <div
-                  className={cn(
-                    "relative flex flex-col h-full rounded-xl overflow-hidden",
-                    "bg-card border border-border/60",
-                    "transition-all duration-300",
-                    // Hover lift + glow
-                    "hover:-translate-y-1 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/20 hover:border-primary/30"
-                  )}
+                <a
+                  href={project.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block h-full"
                 >
-                  <div className="p-6 flex flex-col h-full">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-base font-[400] text-foreground group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 mt-0.5" />
-                    </div>
-                    <p className="text-sm font-[300] text-muted-foreground leading-relaxed flex-1">
-                      {project.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="text-[10px] font-[300] px-2 py-0.5"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
+                  <div className="relative flex flex-col h-full">
+                    <div className="p-6 flex flex-col h-full">
+                      <div className="flex items-start justify-between mb-3">
+                        <h3 className="text-base font-[500] text-foreground group-hover:text-primary transition-colors">
+                          {project.title}
+                        </h3>
+                        <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 mt-0.5" />
+                      </div>
+                      <p className="text-sm font-[300] text-muted-foreground leading-relaxed flex-1">
+                        {project.desc}
+                      </p>
+
+                      {/* Inline stats for the big card */}
+                      {project.gradient && (
+                        <div className="flex gap-4 mt-3 mb-3">
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-[500] text-primary">8人</span>
+                            <span className="text-[10px] font-[300] text-muted-foreground/60">团队</span>
+                          </div>
+                          <div className="flex items-center gap-1.5">
+                            <span className="text-xs font-[500] text-primary">14天/篇</span>
+                            <span className="text-[10px] font-[300] text-muted-foreground/60">频率</span>
+                          </div>
+                        </div>
+                      )}
+
+                      <div className="flex flex-wrap gap-2 mt-auto pt-3">
+                        {project.tags.map((tag) => (
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className="text-[10px] font-[300] px-2 py-0.5"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </a>
+                </a>
+              </MagicCard>
             </motion.div>
           ))}
         </BentoGrid>
@@ -104,4 +120,3 @@ export function Projects() {
     </section>
   );
 }
-

@@ -1,7 +1,36 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "@/components/ui/card";
+import { MagicCard } from "@/components/ui/magic-card";
+
+const facts = [
+  { emoji: "🎂", label: "19岁" },
+  { emoji: "📍", label: "中国" },
+  { emoji: "🎓", label: "大学生" },
+  { emoji: "📝", label: "20+篇文章" },
+  { emoji: "👥", label: "8人团队" },
+];
+
+const highlights = [
+  {
+    emoji: "🚀",
+    label: "通识分享企划",
+    desc: "非盈利内容企划，8人团队，每两周一篇深度文章",
+    href: "https://blog.for-people.cn/",
+  },
+  {
+    emoji: "🧰",
+    label: "电脑高手速成班",
+    desc: "结构化技术教程，让新手也能成为高手",
+    href: "https://www.notion.so/1a966ad7c9c483cf839081223d50a9fd",
+  },
+  {
+    emoji: "🤖",
+    label: "Vibe Coding",
+    desc: "用 AI 辅助开发的实践者，追求效率与实用",
+    href: "https://github.com/publieople",
+  },
+];
 
 export function About() {
   return (
@@ -26,6 +55,19 @@ export function About() {
               触及的，这也是我做一切事情的出发点。
             </p>
           </div>
+
+          {/* Quick facts bar */}
+          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
+            {facts.map((fact) => (
+              <span
+                key={fact.label}
+                className="inline-flex items-center gap-1.5 text-xs font-[400] text-muted-foreground/70"
+              >
+                <span>{fact.emoji}</span>
+                <span>{fact.label}</span>
+              </span>
+            ))}
+          </div>
         </motion.div>
 
         {/* Highlights */}
@@ -36,35 +78,26 @@ export function About() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-12 grid sm:grid-cols-3 gap-4"
         >
-          {[
-            {
-              label: "通识分享企划",
-              desc: "非盈利内容企划，8人团队，每两周一篇深度文章",
-              href: "https://blog.for-people.cn/",
-            },
-            {
-              label: "电脑高手速成班",
-              desc: "结构化技术教程，让新手也能成为高手",
-              href: "https://www.notion.so/1a966ad7c9c483cf839081223d50a9fd",
-            },
-            {
-              label: "Vibe Coding",
-              desc: "用 AI 辅助开发的实践者，追求效率与实用",
-              href: "https://github.com/publieople",
-            },
-          ].map((item, i) => (
-            <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
-              <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px] hover:shadow-primary/15">
-                <CardContent className="p-6">
-                  <h3 className="text-sm font-[400] text-foreground mb-2 group-hover:text-primary transition-colors">
+          {highlights.map((item) => (
+            <MagicCard
+              key={item.label}
+              className="rounded-2xl cursor-pointer"
+              gradientColor="#262626"
+              gradientFrom="#9E7AFF"
+              gradientTo="#FE8BBB"
+            >
+              <a href={item.href} target="_blank" rel="noreferrer" className="block h-full">
+                <div className="p-5">
+                  <span className="text-xl mb-2 block leading-none">{item.emoji}</span>
+                  <h3 className="text-sm font-[500] text-foreground mb-2 group-hover:text-primary transition-colors">
                     {item.label}
                   </h3>
                   <p className="text-xs font-[300] text-muted-foreground leading-relaxed">
                     {item.desc}
                   </p>
-                </CardContent>
-              </Card>
-            </a>
+                </div>
+              </a>
+            </MagicCard>
           ))}
         </motion.div>
       </div>

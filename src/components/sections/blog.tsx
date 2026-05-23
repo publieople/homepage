@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { ArrowUpRight } from "lucide-react";
-import { CardContainer, CardBody } from "@/components/ui/3d-card";
 
 const blogPosts = [
   {
@@ -61,26 +60,21 @@ export function Blog() {
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
             >
-              <CardContainer containerClassName="!p-0 w-full" className="w-full">
-                <CardBody className="w-full p-0">
-                  <a href={post.href} target="_blank" rel="noreferrer">
-                    <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 cursor-pointer relative overflow-hidden">
-                      <div className="absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay pointer-events-none" />
-                      <CardContent className="p-5 flex items-center justify-between relative">
-                        <div className="min-w-0">
-                          <h3 className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors truncate">
-                            {post.title}
-                          </h3>
-                          <p className="text-xs font-[300] text-muted-foreground mt-1 line-clamp-1">
-                            {post.desc}
-                          </p>
-                        </div>
-                        <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 ml-4" />
-                      </CardContent>
-                    </Card>
-                  </a>
-                </CardBody>
-              </CardContainer>
+              <a href={post.href} target="_blank" rel="noreferrer">
+                <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px] hover:shadow-primary/15">
+                  <CardContent className="p-5 flex items-center justify-between">
+                    <div className="min-w-0">
+                      <h3 className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors truncate">
+                        {post.title}
+                      </h3>
+                      <p className="text-xs font-[300] text-muted-foreground mt-1 line-clamp-1">
+                        {post.desc}
+                      </p>
+                    </div>
+                    <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 ml-4" />
+                  </CardContent>
+                </Card>
+              </a>
             </motion.div>
           ))}
         </div>

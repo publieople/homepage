@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
-import { CardContainer, CardBody } from "@/components/ui/3d-card";
 
 export function About() {
   return (
@@ -54,23 +53,18 @@ export function About() {
               href: "https://github.com/publieople",
             },
           ].map((item, i) => (
-            <CardContainer key={item.label} containerClassName="!p-0 w-full" className="w-full">
-              <CardBody className="h-full w-full p-0">
-                <a href={item.href} target="_blank" rel="noreferrer">
-                  <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer relative overflow-hidden">
-                    <div className="absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay pointer-events-none" />
-                    <CardContent className="p-6 relative">
-                      <h3 className="text-sm font-[400] text-foreground mb-2 group-hover:text-primary transition-colors">
-                        {item.label}
-                      </h3>
-                      <p className="text-xs font-[300] text-muted-foreground leading-relaxed">
-                        {item.desc}
-                      </p>
-                    </CardContent>
-                  </Card>
-                </a>
-              </CardBody>
-            </CardContainer>
+            <a key={item.label} href={item.href} target="_blank" rel="noreferrer">
+              <Card className="group border-border/60 hover:border-primary/30 transition-all duration-300 h-full cursor-pointer hover:-translate-y-0.5 hover:shadow-[0_0_20px_-3px] hover:shadow-primary/15">
+                <CardContent className="p-6">
+                  <h3 className="text-sm font-[400] text-foreground mb-2 group-hover:text-primary transition-colors">
+                    {item.label}
+                  </h3>
+                  <p className="text-xs font-[300] text-muted-foreground leading-relaxed">
+                    {item.desc}
+                  </p>
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </motion.div>
       </div>

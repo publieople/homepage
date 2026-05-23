@@ -3,7 +3,6 @@
 import { motion } from "framer-motion";
 import { Mail, ExternalLink } from "lucide-react";
 import { GithubIcon } from "@/components/sections/github-icon";
-import { CardContainer, CardBody } from "@/components/ui/3d-card";
 
 const links = [
   {
@@ -57,25 +56,21 @@ export function Contact() {
           className="flex flex-wrap items-center justify-center gap-6"
         >
           {links.map((link) => (
-            <CardContainer key={link.label} containerClassName="!p-0" className="w-full">
-              <CardBody className="p-0 w-full">
-                <a
-                  href={link.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="group flex flex-col items-center gap-2 p-6 rounded-lg border border-border/60 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/15 min-w-[140px] relative overflow-hidden"
-                >
-                  <div className="absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay pointer-events-none" />
-                  <link.icon className="size-6 text-muted-foreground/60 group-hover:text-primary transition-colors relative" />
-                  <span className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors relative">
-                    {link.label}
-                  </span>
-                  <span className="text-[10px] font-[300] text-muted-foreground/50 relative">
-                    {link.desc}
-                  </span>
-                </a>
-              </CardBody>
-            </CardContainer>
+            <a
+              key={link.label}
+              href={link.href}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex flex-col items-center gap-2 p-6 rounded-lg border border-border/60 hover:border-primary/30 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/15 min-w-[140px]"
+            >
+              <link.icon className="size-6 text-muted-foreground/60 group-hover:text-primary transition-colors" />
+              <span className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors">
+                {link.label}
+              </span>
+              <span className="text-[10px] font-[300] text-muted-foreground/50">
+                {link.desc}
+              </span>
+            </a>
           ))}
         </motion.div>
       </div>

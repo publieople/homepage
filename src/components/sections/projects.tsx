@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
+import { CardContainer, CardBody } from "@/components/ui/3d-card";
 
 const projects = [
   {
@@ -58,45 +59,54 @@ export function Projects() {
               transition={{ duration: 0.5, delay: i * 0.1 }}
               className={project.span}
             >
-              <a
-                href={project.href}
-                target="_blank"
-                rel="noreferrer"
-                className="group block h-full"
+              <CardContainer
+                containerClassName="!p-0 h-full w-full"
+                className="h-full w-full"
               >
-                <div
-                  className={cn(
-                    "relative flex flex-col h-full rounded-xl overflow-hidden",
-                    "bg-card border border-border/60",
-                    "transition-all duration-300",
-                    // Hover lift + glow
-                    "hover:-translate-y-1 hover:shadow-[0_0_25px_-3px] hover:shadow-primary/20 hover:border-primary/30"
-                  )}
-                >
-                  <div className="p-6 flex flex-col h-full">
-                    <div className="flex items-start justify-between mb-3">
-                      <h3 className="text-base font-[400] text-foreground group-hover:text-primary transition-colors">
-                        {project.title}
-                      </h3>
-                      <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 mt-0.5" />
+                <CardBody className="h-full w-full p-0">
+                  <a
+                    href={project.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group block h-full"
+                  >
+                    <div
+                      className={cn(
+                        "relative flex flex-col h-full rounded-xl overflow-hidden",
+                        "bg-card border border-border/60",
+                        "transition-all duration-300",
+                        "hover:shadow-[0_0_25px_-3px] hover:shadow-primary/20 hover:border-primary/30"
+                      )}
+                    >
+                      {/* Noise texture overlay */}
+                      <div className="absolute inset-0 bg-noise opacity-[0.04] mix-blend-overlay pointer-events-none" />
+
+                      <div className="relative p-6 flex flex-col h-full">
+                        <div className="flex items-start justify-between mb-3">
+                          <h3 className="text-base font-[400] text-foreground group-hover:text-primary transition-colors">
+                            {project.title}
+                          </h3>
+                          <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 mt-0.5" />
+                        </div>
+                        <p className="text-sm font-[300] text-muted-foreground leading-relaxed flex-1">
+                          {project.desc}
+                        </p>
+                        <div className="flex flex-wrap gap-2 mt-4">
+                          {project.tags.map((tag) => (
+                            <Badge
+                              key={tag}
+                              variant="secondary"
+                              className="text-[10px] font-[300] px-2 py-0.5"
+                            >
+                              {tag}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
                     </div>
-                    <p className="text-sm font-[300] text-muted-foreground leading-relaxed flex-1">
-                      {project.desc}
-                    </p>
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {project.tags.map((tag) => (
-                        <Badge
-                          key={tag}
-                          variant="secondary"
-                          className="text-[10px] font-[300] px-2 py-0.5"
-                        >
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              </a>
+                  </a>
+                </CardBody>
+              </CardContainer>
             </motion.div>
           ))}
         </BentoGrid>
@@ -104,4 +114,3 @@ export function Projects() {
     </section>
   );
 }
-

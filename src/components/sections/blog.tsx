@@ -1,34 +1,131 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowUpRight } from "lucide-react";
-import { MagicCard } from "@/components/ui/magic-card";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
+import { ArrowUpRight, ChevronRight } from "lucide-react";
 
 const blogPosts = [
   {
     title: "操作系统安装",
     desc: "从零开始安装操作系统的完整指南，适合新手入门。",
     href: "https://www.notion.so/1a966ad7c9c4818f9093f020bee982de",
-    meta: "教程 · 约 15 分钟",
+    meta: "教程",
+    readTime: "~15 分钟",
+    gradient: "from-blue-500/10 to-purple-500/10",
+    accent: "bg-blue-500/20",
   },
   {
-    title: "Notion~最好的笔记(?)软件",
+    title: "Notion — 最好的笔记(?)软件",
     desc: "为什么 Notion 可能是最适合你的笔记工具，以及如何用好它。",
     href: "https://www.notion.so/Notion-13c66ad7c9c481a0a126de7b5136f0fa",
-    meta: "工具推荐 · 约 10 分钟",
+    meta: "工具推荐",
+    readTime: "~10 分钟",
+    gradient: "from-violet-500/10 to-pink-500/10",
+    accent: "bg-violet-500/20",
   },
   {
     title: "电脑高手速成班",
     desc: "结构化技术教程，带你从零开始成为电脑高手。",
     href: "https://www.notion.so/9ed66ad7c9c483cf839081223d50a9fd",
-    meta: "系列教程 · 持续更新",
+    meta: "系列教程",
+    readTime: "持续更新",
+    gradient: "from-emerald-500/10 to-teal-500/10",
+    accent: "bg-emerald-500/20",
   },
 ];
 
-export function Blog() {
+function BlogCard({
+  post,
+  index,
+}: {
+  post: (typeof blogPosts)[0];
+  index: number;
+}) {
   return (
-    <section id="blog" className="py-28 px-6">
-      <div className="mx-auto max-w-4xl">
+    <motion.a
+      href={post.href}
+      target="_blank"
+      rel="noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.4, delay: index * 0.08 }}
+      className="group flex-shrink-0 w-[280px] sm:w-[320px] snap-start"
+    >
+      <div className="relative h-full rounded-2xl border border-border/50 bg-card overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15">
+        {/* Gradient header area */}
+        <div
+          className={`h-24 bg-gradient-to-br ${post.gradient} flex items-start justify-end p-4`}
+        >
+          <span
+            className={`inline-flex items-center gap-1 rounded-full ${post.accent} px-2.5 py-0.5 text-[10px] font-[500] text-muted-foreground`}
+          >
+            {post.meta}
+          </span>
+        </div>
+
+        {/* Content area — pushes up on hover */}
+        <div className="p-5 transition-all duration-300">
+          <h3 className="text-sm font-[500] text-foreground transition-colors group-hover:text-primary">
+            {post.title}
+          </h3>
+
+          {/* Hidden overflow: pushes up on hover */}
+          <div className="mt-2 space-y-2 overflow-hidden">
+            <p className="text-xs font-[300] text-muted-foreground leading-relaxed transition-all duration-300 group-hover:translate-y-[-2px]">
+              {post.desc}
+            </p>
+          </div>
+
+          {/* Bottom row: read time + arrow */}
+          <div className="mt-4 flex items-center justify-between border-t border-border/30 pt-3">
+            <span className="text-[10px] font-[300] text-muted-foreground/50">
+              {post.readTime}
+            </span>
+            <ArrowUpRight className="size-3.5 text-muted-foreground/30 transition-all duration-300 group-hover:text-primary/60 group-hover:translate-x-1 group-hover:-translate-y-1" />
+          </div>
+
+          {/* Reading-time progress bar (decorative) */}
+          <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-muted/50">
+            <div className="h-full w-0 bg-primary/30 transition-all duration-700 group-hover:w-full" />
+          </div>
+        </div>
+      </div>
+    </motion.a>
+  );
+}
+
+function AllPostsCard() {
+  return (
+    <motion.a
+      href="https://blog.for-people.cn/"
+      target="_blank"
+      rel="noreferrer"
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.4, delay: 0.3 }}
+      className="group flex-shrink-0 w-[280px] sm:w-[200px] snap-start"
+    >
+      <div className="relative h-full rounded-2xl border border-dashed border-border/50 bg-card/50 flex flex-col items-center justify-center gap-3 p-8 transition-all duration-300 hover:border-primary/30 hover:bg-card hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15">
+        <div className="inline-flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
+          <ChevronRight className="size-5" />
+        </div>
+        <span className="text-xs font-[400] text-muted-foreground/60 group-hover:text-foreground transition-colors">
+          查看全部文章
+        </span>
+      </div>
+    </motion.a>
+  );
+}
+
+export function Blog() {
+  const sectionRef = useRef<HTMLDivElement>(null);
+
+  return (
+    <section id="blog" className="relative py-28 overflow-hidden">
+      <div className="mx-auto max-w-6xl px-6">
+        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -41,7 +138,7 @@ export function Blog() {
               Blog
             </span>
           </h2>
-          <p className="text-sm font-[300] text-muted-foreground/60 mb-10">
+          <p className="text-sm font-[300] text-muted-foreground/60 mb-8">
             更多文章请访问{" "}
             <a
               href="https://blog.for-people.cn/"
@@ -53,43 +150,45 @@ export function Blog() {
             </a>
           </p>
         </motion.div>
+      </div>
 
-        <div className="space-y-3">
+      {/* Horizontal scroll container — bleeds outside the max-w boundary */}
+      <div className="relative px-6">
+        {/* Scroll hint */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.4 }}
+          className="ml-auto mr-10 mb-3 hidden sm:flex items-center justify-end gap-1.5 text-[10px] font-[300] text-muted-foreground/30"
+        >
+          <span>滚动浏览</span>
+          <ChevronRight className="size-3 animate-pulse" />
+        </motion.div>
+
+        <div
+          ref={sectionRef}
+          className="flex gap-4 pb-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide"
+          style={{
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+          }}
+        >
+          <div className="shrink-0 w-[calc((100vw-48px-80px-16px)/2)] sm:w-[calc((100vw-48px-560px)/12)] hidden sm:block" />
           {blogPosts.map((post, i) => (
-            <motion.div
-              key={post.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-            >
-              <MagicCard
-                className="rounded-2xl cursor-pointer"
-                gradientColor="#262626"
-                gradientFrom="#9E7AFF"
-                gradientTo="#FE8BBB"
-              >
-                <a href={post.href} target="_blank" rel="noreferrer" className="block">
-                  <div className="flex items-center justify-between p-5">
-                    <div className="min-w-0">
-                      <h3 className="text-sm font-[500] text-foreground group-hover:text-primary transition-colors truncate">
-                        {post.title}
-                      </h3>
-                      <p className="text-xs font-[300] text-muted-foreground mt-1 line-clamp-1">
-                        {post.desc}
-                      </p>
-                      <span className="inline-block mt-1.5 text-[10px] font-[300] text-muted-foreground/40">
-                        {post.meta}
-                      </span>
-                    </div>
-                    <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 ml-4" />
-                  </div>
-                </a>
-              </MagicCard>
-            </motion.div>
+            <BlogCard key={post.title} post={post} index={i} />
           ))}
+          <AllPostsCard />
+          <div className="shrink-0 w-[calc((100vw-48px-80px-16px)/2)] sm:w-[calc((100vw-48px-560px)/12)] hidden sm:block" />
         </div>
       </div>
+
+      <style jsx>{`
+        div::-webkit-scrollbar {
+          display: none;
+        }
+      `}</style>
     </section>
   );
 }

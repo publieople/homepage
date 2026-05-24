@@ -1,41 +1,151 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { MagicCard } from "@/components/ui/magic-card";
+import { useRef, useState, useEffect } from "react";
+import { motion, useInView } from "framer-motion";
+import {
+  Sparkles,
+  BookOpen,
+  Users,
+  GraduationCap,
+  MapPin,
+  Heart,
+  Terminal,
+  Rocket,
+} from "lucide-react";
 
+/* ---- Animated counter ---- */
+function CountUp({
+  to,
+  suffix = "",
+  label,
+  icon: Icon,
+}: {
+  to: number;
+  suffix?: string;
+  label: string;
+  icon: React.ElementType;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const isInView = useInView(ref, { once: true, margin: "-40px" });
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!isInView) return;
+    let start = 0;
+    const duration = 1000;
+    const step = Math.max(1, Math.ceil(to / (duration / 16)));
+    const timer = setInterval(() => {
+      start += step;
+      if (start >= to) {
+        setCount(to);
+        clearInterval(timer);
+      } else {
+        setCount(start);
+      }
+    }, 16);
+    return () => clearInterval(timer);
+  }, [isInView, to]);
+
+  return (
+    <div
+      ref={ref}
+      className="flex items-center gap-2 text-xs text-muted-foreground/70"
+    >
+      <Icon className="size-3.5 text-primary/60 shrink-0" />
+      <motion.span
+        initial={{ opacity: 0, y: 8 }}
+        animate={isInView ? { opacity: 1, y: 0 } : {}}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="font-[500] text-foreground/80 tabular-nums"
+      >
+        {count}
+        {suffix}
+      </motion.span>
+      <span className="font-[300]">{label}</span>
+    </div>
+  );
+}
+
+/* ---- Facts with animated counters ---- */
 const facts = [
-  { emoji: "🎂", label: "19岁" },
-  { emoji: "📍", label: "中国" },
-  { emoji: "🎓", label: "大学生" },
-  { emoji: "📝", label: "20+篇文章" },
-  { emoji: "👥", label: "8人团队" },
+  { icon: Sparkles, value: 19, suffix: "岁", label: "" },
+  { icon: MapPin, value: 0, suffix: "", label: "中国", static: true },
+  { icon: GraduationCap, value: 0, suffix: "", label: "大学生", static: true },
+  { icon: BookOpen, value: 20, suffix: "+", label: "文章" },
+  { icon: Users, value: 8, suffix: "人", label: "团队" },
 ];
 
+/* ---- Highlights with Tilt ---- */
 const highlights = [
   {
-    emoji: "🚀",
+    icon: Rocket,
     label: "通识分享企划",
     desc: "非盈利内容企划，8人团队，每两周一篇深度文章",
     href: "https://blog.for-people.cn/",
   },
   {
-    emoji: "🧰",
+    icon: Terminal,
     label: "电脑高手速成班",
     desc: "结构化技术教程，让新手也能成为高手",
     href: "https://www.notion.so/1a966ad7c9c483cf839081223d50a9fd",
   },
   {
-    emoji: "🤖",
+    icon: Heart,
     label: "Vibe Coding",
     desc: "用 AI 辅助开发的实践者，追求效率与实用",
     href: "https://github.com/publieople",
   },
 ];
 
+function TiltCard({
+  children,
+  href,
+}: {
+  children: React.ReactNode;
+  href: string;
+}) {
+  const cardRef = useRef<HTMLDivElement>(null);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (!cardRef.current) return;
+    const rect = cardRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    cardRef.current.style.transform = `perspective(400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    cardRef.current.style.transition = "transform 0.08s ease-out";
+  };
+
+  const handleMouseLeave = () => {
+    if (!cardRef.current) return;
+    cardRef.current.style.transform =
+      "perspective(400px) rotateX(0deg) rotateY(0deg)";
+    cardRef.current.style.transition = "transform 0.4s ease-out";
+  };
+
+  return (
+    <a href={href} target="_blank" rel="noreferrer" className="block h-full">
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        className="relative h-full rounded-2xl border border-border/50 bg-card p-5 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/20"
+        style={{ transformStyle: "preserve-3d" }}
+      >
+        {children}
+      </div>
+    </a>
+  );
+}
+
 export function About() {
   return (
-    <section id="about" className="py-28 px-6">
+    <section id="about" className="relative py-28 px-6">
       <div className="mx-auto max-w-4xl">
+        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -56,21 +166,34 @@ export function About() {
             </p>
           </div>
 
-          {/* Quick facts bar */}
-          <div className="mt-6 flex flex-wrap gap-x-5 gap-y-2">
-            {facts.map((fact) => (
-              <span
-                key={fact.label}
-                className="inline-flex items-center gap-1.5 text-xs font-[400] text-muted-foreground/70"
-              >
-                <span>{fact.emoji}</span>
-                <span>{fact.label}</span>
-              </span>
-            ))}
+          {/* Animated facts bar — no emoji */}
+          <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3">
+            {facts.map((fact) => {
+              if (fact.static) {
+                return (
+                  <div
+                    key={fact.label}
+                    className="flex items-center gap-2 text-xs text-muted-foreground/70"
+                  >
+                    <fact.icon className="size-3.5 text-primary/60 shrink-0" />
+                    <span className="font-[300]">{fact.label}</span>
+                  </div>
+                );
+              }
+              return (
+                <CountUp
+                  key={fact.label}
+                  to={fact.value}
+                  suffix={fact.suffix}
+                  label={fact.label}
+                  icon={fact.icon}
+                />
+              );
+            })}
           </div>
         </motion.div>
 
-        {/* Highlights */}
+        {/* Highlights with 3D Tilt */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -79,25 +202,21 @@ export function About() {
           className="mt-12 grid sm:grid-cols-3 gap-4"
         >
           {highlights.map((item) => (
-            <MagicCard
-              key={item.label}
-              className="rounded-2xl cursor-pointer"
-              gradientColor="#262626"
-              gradientFrom="#9E7AFF"
-              gradientTo="#FE8BBB"
-            >
-              <a href={item.href} target="_blank" rel="noreferrer" className="block h-full">
-                <div className="p-5">
-                  <span className="text-xl mb-2 block leading-none">{item.emoji}</span>
-                  <h3 className="text-sm font-[500] text-foreground mb-2 group-hover:text-primary transition-colors">
+            <TiltCard key={item.label} href={item.href}>
+              <div className="flex flex-col gap-3">
+                <div className="inline-flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                  <item.icon className="size-5" />
+                </div>
+                <div>
+                  <h3 className="text-sm font-[500] text-foreground group-hover:text-primary transition-colors">
                     {item.label}
                   </h3>
-                  <p className="text-xs font-[300] text-muted-foreground leading-relaxed">
+                  <p className="text-xs font-[300] text-muted-foreground leading-relaxed mt-1">
                     {item.desc}
                   </p>
                 </div>
-              </a>
-            </MagicCard>
+              </div>
+            </TiltCard>
           ))}
         </motion.div>
       </div>

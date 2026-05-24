@@ -123,7 +123,7 @@ export function Blog() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="blog" className="relative py-28 overflow-hidden">
+    <section id="blog" className="relative py-28">
       <div className="mx-auto max-w-6xl px-6">
         {/* Title */}
         <motion.div

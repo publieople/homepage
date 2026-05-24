@@ -279,6 +279,11 @@ html {
   }
   html {
     @apply font-sans;
+    overflow-x: clip;
+  }
+
+  body {
+    overflow-x: clip;
   }
 
   h1, h2, h3, h4 {

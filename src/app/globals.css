@@ -15,7 +15,7 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sans);
   --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
+  --font-heading: var(--font-heading);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
   --color-popover: var(--popover);
@@ -279,6 +279,10 @@ html {
   }
   html {
     @apply font-sans;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-heading);
   }
 }
 

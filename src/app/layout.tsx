@@ -1,13 +1,19 @@
 import type { Metadata } from "next";
-import { Source_Sans_3, Geist_Mono } from "next/font/google";
+import { Archivo, Space_Grotesk, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
 import "./globals.css";
 
-const sourceSans = Source_Sans_3({
+const archivo = Archivo({
+  variable: "--font-heading",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+});
+
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-sans",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["300", "400", "500", "600", "700"],
 });
 
 const geistMono = Geist_Mono({
@@ -37,7 +43,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
-      className={`${sourceSans.variable} ${geistMono.variable}`}
+      className={`${archivo.variable} ${spaceGrotesk.variable} ${geistMono.variable}`}
     >
       <head>
         <script

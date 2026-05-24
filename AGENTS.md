@@ -77,6 +77,22 @@ src/
 - `LICENSE` — MIT
 
 ## Relevant Skills (load with skill_view)
-- `shadcn-magicui-development` — shadcn/ui + magicui 组件组装与配置
-- `shadcn-homepage-effects` — 3D tilt, typing animation, noise texture 等交互特效
-- `homepage-design` — 个人主页重设计（参考模板与模式）
+
+### Frontend / UI
+| Skill | 用途 |
+|-------|------|
+| `shadcn-magicui-development` | shadcn/ui + magicui 组件组装与配置 |
+| `shadcn-homepage-effects` | 3D tilt, typing animation, noise texture 等交互特效 |
+| `homepage-design` | 个人主页重设计（参考模板与模式） |
+| `popular-web-designs` | Stripe/Linear/Vercel 等 54 个设计系统参考 |
+| `claude-design` | 一次性 HTML 设计原型 |
+
+### 工作流 (已安装)
+| Skill | 用途 |
+|-------|------|
+| `comet` + `comet-*` | 5 阶段状态机管线（open→design→build→verify→archive） |
+| `openspec-*` | OpenSpec 变更管理（propose/explore/apply-change/archive） |
+| `superpowers/brainstorming` | 创意构思阶段必用 |
+| `superpowers/executing-plans` | 有计划时按步骤执行 |
+| `superpowers/verification-before-completion` | 交付前验证清单 |
+| `superpowers/writing-skills` | 创建/更新 skill 时用 |

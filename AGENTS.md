@@ -75,3 +75,8 @@ src/
 ## Related Documents
 - `README.md` — Project overview
 - `LICENSE` — MIT
+
+## Relevant Skills (load with skill_view)
+- `shadcn-magicui-development` — shadcn/ui + magicui 组件组装与配置
+- `shadcn-homepage-effects` — 3D tilt, typing animation, noise texture 等交互特效
+- `homepage-design` — 个人主页重设计（参考模板与模式）

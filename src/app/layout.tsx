@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Archivo, Space_Grotesk, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/hooks/use-theme";
 import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { NoiseOverlay } from "@/components/ui/noise-overlay";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -68,6 +69,7 @@ export default function RootLayout({
       <body className="min-h-screen font-sans antialiased">
         <ThemeProvider>
           <ScrollProgress className="top-[65px]" />
+          <NoiseOverlay opacity={0.018} />
           {children}
         </ThemeProvider>
       </body>

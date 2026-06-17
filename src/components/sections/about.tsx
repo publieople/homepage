@@ -128,14 +128,26 @@ function TiltCard({
 
   return (
     <a href={href} target="_blank" rel="noreferrer" className="block h-full">
-      <div
-        ref={cardRef}
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        className="relative h-full rounded-2xl border border-border/50 bg-card p-5 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/20"
-        style={{ transformStyle: "preserve-3d" }}
-      >
-        {children}
+      <div className="group/card relative h-full">
+        {/* Neon border glow on hover */}
+        <div
+          className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"
+          style={{
+            background: "conic-gradient(from 0deg, var(--primary), transparent 40%, transparent 60%, var(--primary), transparent)",
+            animation: "neon-spin 4s linear infinite",
+            filter: "blur(4px)",
+          }}
+          aria-hidden="true"
+        />
+        <div
+          ref={cardRef}
+          onMouseMove={handleMouseMove}
+          onMouseLeave={handleMouseLeave}
+          className="relative h-full rounded-2xl border border-border/50 bg-card p-5 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/20"
+          style={{ transformStyle: "preserve-3d" }}
+        >
+          {children}
+        </div>
       </div>
     </a>
   );

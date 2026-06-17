@@ -6,6 +6,7 @@ import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
 import { MagicCard } from "@/components/ui/magic-card";
+import { ShineBorder } from "@/components/ui/shine-border";
 
 const projects = [
   {
@@ -66,6 +67,12 @@ export function Projects() {
                 gradientFrom="#9E7AFF"
                 gradientTo="#FE8BBB"
               >
+                <ShineBorder
+                  shineColor="#9E7AFF"
+                  borderWidth={2}
+                  duration={10}
+                  className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                />
                 <a
                   href={project.href}
                   target="_blank"

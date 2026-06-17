@@ -81,10 +81,21 @@ export function Contact() {
               variants={cardVariants}
               className="group flex-1 min-w-[160px] max-w-[220px]"
             >
-              <a
-                href={link.href}
-                target="_blank"
-                rel="noreferrer"
+              <div className="relative h-full">
+                {/* Neon border glow on hover */}
+                <div
+                  className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{
+                    background: "conic-gradient(from 0deg, var(--primary), transparent 40%, transparent 60%, var(--primary), transparent)",
+                    animation: "neon-spin 4s linear infinite",
+                    filter: "blur(4px)",
+                  }}
+                  aria-hidden="true"
+                />
+                <a
+                  href={link.href}
+                  target="_blank"
+                  rel="noreferrer"
                 className={`relative flex flex-col items-center gap-3 p-8 rounded-2xl border border-border/50 bg-card transition-all duration-300 ${link.color} hover:border-transparent hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15`}
               >
                 {/* Background color bleed on hover */}
@@ -107,6 +118,7 @@ export function Contact() {
                 {/* Arrow indicator */}
                 <ExternalLink className="absolute top-3 right-3 size-3 text-muted-foreground/20 transition-all duration-300 group-hover:text-muted-foreground/50 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
               </a>
+              </div>
             </motion.div>
           ))}
         </motion.div>

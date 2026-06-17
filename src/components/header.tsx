@@ -1,7 +1,8 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
+import { motion, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -18,12 +19,15 @@ const navItems = [
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  // Use framer-motion's useScroll instead of window.addEventListener("scroll")
+  // Taste Skill Section 5.D: window.addEventListener("scroll") is banned
+  const { scrollY } = useScroll();
+  scrollY.on("change", (latest) => {
+    const isScrolled = latest > 20;
+    if (isScrolled !== scrolled) setScrolled(isScrolled);
+  });
 
   const handleNav = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
@@ -36,6 +40,7 @@ export function Header() {
 
   return (
     <header
+      ref={scrollRef}
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
         scrolled

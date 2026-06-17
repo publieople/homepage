@@ -79,7 +79,19 @@
   0% {
     transform: rotate(calc(var(--angle) * 1deg)) translateY(calc(var(--radius) * 1px)) rotate(calc(var(--angle) * -1deg));}
   100% {
-    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));}}}
+    transform: rotate(calc(var(--angle) * 1deg + 360deg)) translateY(calc(var(--radius) * 1px)) rotate(calc((var(--angle) * -1deg) - 360deg));}}
+  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  @keyframes glow-pulse {
+  0%, 100% { text-shadow: 0 0 20px var(--glow-color, var(--primary)), 0 0 40px var(--glow-color, var(--primary)), 0 0 80px var(--glow-color, var(--primary)); }
+  50% { text-shadow: 0 0 10px var(--glow-color, var(--primary)), 0 0 20px var(--glow-color, var(--primary)), 0 0 40px var(--glow-color, var(--primary)); }
+  }
+  --animate-neon-spin: neon-spin 4s linear infinite;
+  @keyframes neon-spin { to { transform: rotate(360deg); } }
+  --animate-crt-flicker: crt-flicker 0.15s infinite;
+  @keyframes crt-flicker {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 0.03; }
+  }}
 
 /* ============================================================
    Default Theme — Stripe

@@ -112,7 +112,7 @@ export function Blog() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="blog" data-od-id="blog" className="relative py-28">
+    <section id="blog" data-od-id="blog" className="relative py-28 scroll-mt-20">
       <div className="mx-auto max-w-6xl px-6">
         {/* Title */}
         <motion.div

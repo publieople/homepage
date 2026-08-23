@@ -6,7 +6,7 @@ import { FileText, ExternalLink } from "lucide-react";
 
 export function ResumeSection() {
   return (
-    <section id="resume" data-od-id="resume" className="py-28 px-6">
+    <section id="resume" data-od-id="resume" className="py-28 px-6 scroll-mt-20">
       <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

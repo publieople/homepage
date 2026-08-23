@@ -34,7 +34,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" data-od-id="projects" className="relative py-28 px-6">
+    <section id="projects" data-od-id="projects" className="sticky top-0 z-30 flex h-[100dvh] items-center justify-center overflow-hidden bg-background px-6 snap-start snap-always">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}

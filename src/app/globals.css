@@ -402,3 +402,69 @@ html {
     clip-path: circle(141.4% at 50% 50%);
   }
 }
+/* ============================================================
+   ScrollStack page-edge markers
+   Each pinned screen inside the full-page snap stack gets a thin
+   hairline + a violet glow divider at its top (Linear "page header"
+   line), plus a soft upward fade shadow at its bottom so the next
+   page reads as "covering" the previous one during the slide-over.
+   ============================================================ */
+
+:where([data-od-id="stack"] > section) {
+  position: relative;
+}
+
+/* Top hairline + violet glow divider (page header line) */
+:where([data-od-id="stack"] > section)::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--border) 18%,
+    var(--border) 82%,
+    transparent 100%
+  );
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* Thin violet glow accent centered under the hairline */
+:where([data-od-id="stack"] > section)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(240px, 44%);
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary) 50%,
+    transparent
+  );
+  opacity: 0.8;
+  box-shadow: 0 0 14px 0 var(--primary);
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* Soft top glow wash to lift each page header off the near-black canvas,
+   so the "next page" silhouette reads during the slide-over. */
+:where([data-od-id="stack"] > section)::after {
+  filter: none;
+}
+
+/* Bottom upward fade shadow so the covering page separates from the one below.
+   Applied only to non-first children (skip Hero) to avoid a shadow at page top. */
+:where([data-od-id="stack"] > section) {
+  box-shadow: 0 -32px 60px -36px rgb(0 0 0 / 0.65);
+}
+:where([data-od-id="stack"] > section:first-child) {
+  box-shadow: none;
+}

@@ -145,7 +145,7 @@ function TiltCard({
 
 export function About() {
   return (
-    <section id="about" data-od-id="about" className="relative py-28 px-6">
+    <section id="about" data-od-id="about" className="sticky top-0 z-20 flex h-[100dvh] items-center overflow-hidden bg-background px-6 snap-start snap-always">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
         <motion.div

@@ -10,18 +10,9 @@ import { ResumeSection } from "@/components/sections/resume-section";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { SectionNav } from "@/components/sections/section-nav";
+import { ScrollStack } from "@/components/sections/scroll-stack";
 
 const SECTION_VARIANTS = {
-  about: {
-    initial: { opacity: 0, y: 40 },
-    whileInView: { opacity: 1, y: 0 },
-    transition: { duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
-  projects: {
-    initial: { opacity: 0, x: -30 },
-    whileInView: { opacity: 1, x: 0 },
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1] as const },
-  },
   blog: {
     initial: { opacity: 0, x: 30 },
     whileInView: { opacity: 1, x: 0 },
@@ -63,13 +54,14 @@ export default function Home() {
     <>
       <Header />
       <main>
-        <Hero />
-        <SectionWrapper variants={SECTION_VARIANTS.about}>
+        {/* Full-page snap stack: Hero → About → Projects (pinned, overlapping covers) */}
+        <ScrollStack height={300}>
+          <Hero />
           <About />
-        </SectionWrapper>
-        <SectionWrapper variants={SECTION_VARIANTS.projects}>
           <Projects />
-        </SectionWrapper>
+        </ScrollStack>
+
+        {/* Remaining sections flow normally */}
         <SectionWrapper variants={SECTION_VARIANTS.blog}>
           <Blog />
         </SectionWrapper>

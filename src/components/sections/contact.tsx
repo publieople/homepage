@@ -46,7 +46,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" data-od-id="contact" className="relative py-28 px-6">
+    <section id="contact" data-od-id="contact" className="relative py-28 px-6 scroll-mt-20">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
         <motion.div

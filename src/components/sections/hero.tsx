@@ -17,6 +17,7 @@ import { SiArchlinux, SiDocker } from "@icons-pack/react-simple-icons";
 import { QuickerIcon } from "@/components/sections/quicker-icon";
 import { AdobePhotoshopIcon } from "@/components/sections/adobe-photoshop-icon";
 import { DotGrid } from "@/components/ui/dot-grid";
+import { AuroraBackground } from "@/components/ui/aurora-background";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
@@ -60,25 +61,8 @@ export function Hero() {
       onMouseLeave={handleMouseLeave}
       className="relative flex min-h-[100dvh] items-center justify-center overflow-hidden px-6"
     >
-      {/* ── Linear-style ambient beam (indigo, very soft) ── */}
-      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div
-          className="absolute left-1/2 top-0 h-[620px] w-[min(1100px,120%)] -translate-x-1/2"
-          style={{
-            background:
-              "radial-gradient(ellipse 55% 65% at 50% 0%, color-mix(in oklch, var(--primary) 22%, transparent), transparent 70%)",
-          }}
-        />
-        {/* second faint bloom lower right for depth */}
-        <div
-          className="absolute right-[6%] bottom-[-10%] h-[420px] w-[420px] rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, color-mix(in oklch, var(--primary) 10%, transparent), transparent 70%)",
-            filter: "blur(50px)",
-          }}
-        />
-      </div>
+      {/* ── Aurora: multi-color glow blobs following the pointer ── */}
+      <AuroraBackground blur={96} />
 
       {/* ── Dynamic dot grid background (faint, engineering feel) ── */}
       <DotGrid spacing={30} dotSize={1.2} baseOpacity={0.07} />

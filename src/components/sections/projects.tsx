@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
@@ -35,7 +34,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="py-28 px-6 bg-muted/30">
+    <section id="projects" data-od-id="projects" className="relative py-28 px-6">
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -43,11 +42,11 @@ export function Projects() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-[300] tracking-tight mb-12 text-foreground">
+          <p className="text-xs font-mono tracking-[0.18em] uppercase text-primary/80 mb-4">
+            /projects
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-[300] tracking-[-0.02em] mb-12 text-foreground">
             项目
-            <span className="block text-sm font-[400] text-muted-foreground mt-2 tracking-normal">
-              Projects
-            </span>
           </h2>
         </motion.div>
 
@@ -62,14 +61,14 @@ export function Projects() {
               className={project.span}
             >
               <MagicCard
-                className="h-full rounded-2xl cursor-pointer"
-                gradientColor="#262626"
-                gradientFrom="#9E7AFF"
-                gradientTo="#FE8BBB"
+                className="h-full rounded-xl cursor-pointer border border-border bg-card"
+                gradientColor="rgb(23 24 26)"
+                gradientFrom="#7170ff"
+                gradientTo="#5e6ad2"
               >
                 <ShineBorder
-                  shineColor="#9E7AFF"
-                  borderWidth={2}
+                  shineColor="#7170ff"
+                  borderWidth={1}
                   duration={10}
                   className="opacity-0 group-hover:opacity-100 transition-opacity duration-500"
                 />
@@ -82,7 +81,7 @@ export function Projects() {
                   <div className="relative flex flex-col h-full">
                     <div className="p-6 flex flex-col h-full">
                       <div className="flex items-start justify-between mb-3">
-                        <h3 className="text-base font-[500] text-foreground group-hover:text-primary transition-colors">
+                        <h3 className="text-base font-[400] text-foreground group-hover:text-primary transition-colors">
                           {project.title}
                         </h3>
                         <ArrowUpRight className="size-4 text-muted-foreground/40 group-hover:text-primary/60 transition-colors shrink-0 mt-0.5" />
@@ -95,11 +94,11 @@ export function Projects() {
                       {project.gradient && (
                         <div className="flex gap-4 mt-3 mb-3">
                           <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-[500] text-primary">8人</span>
+                            <span className="text-xs font-[400] text-primary">8人</span>
                             <span className="text-[10px] font-[300] text-muted-foreground/60">团队</span>
                           </div>
                           <div className="flex items-center gap-1.5">
-                            <span className="text-xs font-[500] text-primary">14天/篇</span>
+                            <span className="text-xs font-[400] text-primary">14天/篇</span>
                             <span className="text-[10px] font-[300] text-muted-foreground/60">频率</span>
                           </div>
                         </div>

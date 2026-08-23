@@ -11,8 +11,6 @@ const blogPosts = [
     href: "https://www.notion.so/1a966ad7c9c4818f9093f020bee982de",
     meta: "教程",
     readTime: "~15 分钟",
-    gradient: "from-blue-500/10 to-purple-500/10",
-    accent: "bg-blue-500/20",
   },
   {
     title: "Notion — 最好的笔记(?)软件",
@@ -20,8 +18,6 @@ const blogPosts = [
     href: "https://www.notion.so/Notion-13c66ad7c9c481a0a126de7b5136f0fa",
     meta: "工具推荐",
     readTime: "~10 分钟",
-    gradient: "from-violet-500/10 to-pink-500/10",
-    accent: "bg-violet-500/20",
   },
   {
     title: "电脑高手速成班",
@@ -29,8 +25,6 @@ const blogPosts = [
     href: "https://www.notion.so/9ed66ad7c9c483cf839081223d50a9fd",
     meta: "系列教程",
     readTime: "持续更新",
-    gradient: "from-emerald-500/10 to-teal-500/10",
-    accent: "bg-emerald-500/20",
   },
 ];
 
@@ -52,42 +46,37 @@ function BlogCard({
       transition={{ duration: 0.4, delay: index * 0.08 }}
       className="group flex-shrink-0 w-[280px] sm:w-[320px] snap-start"
     >
-      <div className="relative h-full rounded-2xl border border-border/50 bg-card overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15">
-        {/* Gradient header area */}
-        <div
-          className={`h-24 bg-gradient-to-br ${post.gradient} flex items-start justify-end p-4`}
-        >
-          <span
-            className={`inline-flex items-center gap-1 rounded-full ${post.accent} px-2.5 py-0.5 text-[10px] font-[500] text-muted-foreground`}
-          >
+      <div className="relative h-full rounded-xl border border-border bg-card overflow-hidden transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_0_1px] hover:shadow-primary/10">
+        {/* Mono eyebrow header area — Linear style */}
+        <div className="h-24 border-b border-border/40 bg-muted/40 flex items-start justify-between p-5">
+          <span className="font-mono text-[10px] tracking-[0.18em] uppercase text-primary/80 mt-1">
             {post.meta}
           </span>
+          <ArrowUpRight className="size-4 text-muted-foreground/30 transition-all duration-300 group-hover:text-primary/60 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </div>
 
-        {/* Content area — pushes up on hover */}
+        {/* Content area */}
         <div className="p-5 transition-all duration-300">
-          <h3 className="text-sm font-[500] text-foreground transition-colors group-hover:text-primary">
+          <h3 className="text-sm font-[400] text-foreground transition-colors group-hover:text-primary">
             {post.title}
           </h3>
 
-          {/* Hidden overflow: pushes up on hover */}
           <div className="mt-2 space-y-2 overflow-hidden">
             <p className="text-xs font-[300] text-muted-foreground leading-relaxed transition-all duration-300 group-hover:translate-y-[-2px]">
               {post.desc}
             </p>
           </div>
 
-          {/* Bottom row: read time + arrow */}
+          {/* Bottom row: read time */}
           <div className="mt-4 flex items-center justify-between border-t border-border/30 pt-3">
-            <span className="text-[10px] font-[300] text-muted-foreground/50">
+            <span className="font-mono text-[10px] font-[300] text-muted-foreground/60">
               {post.readTime}
             </span>
-            <ArrowUpRight className="size-3.5 text-muted-foreground/30 transition-all duration-300 group-hover:text-primary/60 group-hover:translate-x-1 group-hover:-translate-y-1" />
           </div>
 
           {/* Reading-time progress bar (decorative) */}
           <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-muted/50">
-            <div className="h-full w-0 bg-primary/30 transition-all duration-700 group-hover:w-full" />
+            <div className="h-full w-0 bg-primary/40 transition-all duration-700 group-hover:w-full" />
           </div>
         </div>
       </div>
@@ -107,7 +96,7 @@ function AllPostsCard() {
       transition={{ duration: 0.4, delay: 0.3 }}
       className="group flex-shrink-0 w-[280px] sm:w-[200px] snap-start"
     >
-      <div className="relative h-full rounded-2xl border border-dashed border-border/50 bg-card/50 flex flex-col items-center justify-center gap-3 p-8 transition-all duration-300 hover:border-primary/30 hover:bg-card hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15">
+      <div className="relative h-full rounded-xl border border-dashed border-border/50 bg-card/50 flex flex-col items-center justify-center gap-3 p-8 transition-all duration-300 hover:border-primary/30 hover:bg-card hover:shadow-[0_0_0_1px] hover:shadow-primary/10">
         <div className="inline-flex size-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-transform duration-300 group-hover:scale-110">
           <ChevronRight className="size-5" />
         </div>
@@ -123,7 +112,7 @@ export function Blog() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="blog" className="relative py-28">
+    <section id="blog" data-od-id="blog" className="relative py-28">
       <div className="mx-auto max-w-6xl px-6">
         {/* Title */}
         <motion.div
@@ -132,11 +121,11 @@ export function Blog() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-[300] tracking-tight mb-2 text-foreground">
+          <p className="text-xs font-mono tracking-[0.18em] uppercase text-primary/80 mb-4">
+            /blog
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-[300] tracking-[-0.02em] mb-2 text-foreground">
             精选文章
-            <span className="block text-sm font-[400] text-muted-foreground mt-2 tracking-normal">
-              Blog
-            </span>
           </h2>
           <p className="text-sm font-[300] text-muted-foreground/60 mb-8">
             更多文章请访问{" "}
@@ -192,3 +181,4 @@ export function Blog() {
     </section>
   );
 }
+

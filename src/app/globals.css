@@ -94,63 +94,163 @@
   }}
 
 /* ============================================================
-   Default Theme — Stripe
-   Inspired by Stripe's fintech design system:
-   - Light weight (300) as signature
-   - Deep navy (#061b31) headings
-   - Signature purple (#533afd) accents
-   - Blue-tinted shadows
-   - Conservative border-radius (4px-8px)
+   Default Theme — Linear
+   Inspired by Linear's dark-native design system:
+   - Near-black canvas (#08090a) with luminance-graded surfaces
+   - Single brand accent: indigo-violet (#7170ff)
+   - Ultra-thin semi-transparent white borders (rgba 5-8%)
+   - Ghost button backgrounds at 2-5% white opacity
+   - 8px base radius, layered inset shadows for depth
    ============================================================ */
 
 :root,
-:root[data-theme="stripe"] {
+:root[data-theme="linear"] {
   /* Background & Foreground */
+  --background: oklch(16.6% 0.002 260);
+  --foreground: oklch(95.5% 0.001 260);
+
+  /* Cards */
+  --card: oklch(18.8% 0.002 260);
+  --card-foreground: oklch(95.5% 0.001 260);
+  --popover: oklch(19.2% 0.0025 260);
+  --popover-foreground: oklch(95.5% 0.001 260);
+
+  /* Primary - Linear Indigo Violet #7170ff */
+  --primary: oklch(62% 0.18 290);
+  --primary-foreground: oklch(98% 0 0);
+
+  /* Secondary — subtle white wash */
+  --secondary: oklch(100% 0 0 / 4%);
+  --secondary-foreground: oklch(88% 0.005 260);
+
+  /* Muted */
+  --muted: oklch(100% 0 0 / 4%);
+  --muted-foreground: oklch(68% 0.012 260);
+
+  /* Accent */
+  --accent: oklch(100% 0 0 / 5%);
+  --accent-foreground: oklch(95.5% 0.001 260);
+
+  /* Destructive */
+  --destructive: oklch(65% 0.2 25);
+  --destructive-foreground: oklch(98% 0 0);
+
+  /* Borders & Inputs — Linear semi-transparent white */
+  --border: oklch(100% 0 0 / 8%);
+  --input: oklch(100% 0 0 / 12%);
+  --ring: var(--primary);
+
+  /* Border Radius - Linear's 8px base */
+  --radius: 0.5rem;
+
+  /* Charts */
+  --chart-1: var(--primary);
+  --chart-2: oklch(70% 0.12 230);
+  --chart-3: oklch(70% 0.14 160);
+  --chart-4: oklch(78% 0.11 60);
+  --chart-5: oklch(45% 0.18 25);
+
+  /* Sidebar */
+  --sidebar: oklch(17.8% 0.002 260);
+  --sidebar-foreground: oklch(95.5% 0.001 260);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: oklch(98% 0 0);
+  --sidebar-accent: oklch(100% 0 0 / 5%);
+  --sidebar-accent-foreground: oklch(95.5% 0.001 260);
+  --sidebar-border: oklch(100% 0 0 / 8%);
+  --sidebar-ring: var(--primary);
+}
+
+/* ============================================================
+   Linear — Light Mode
+   data-mode is orthogonal to data-theme.
+   Light surfaces from Linear's light theme (#f7f8f8 canvas).
+   ============================================================ */
+
+:root[data-theme="linear"][data-mode="light"] {
+  --background: oklch(97.5% 0.0015 260);
+  --foreground: oklch(18% 0.01 255);
+
+  --card: oklch(100% 0 0);
+  --card-foreground: oklch(18% 0.01 255);
+  --popover: oklch(100% 0 0);
+  --popover-foreground: oklch(18% 0.01 255);
+
+  --primary: oklch(52% 0.2 290);
+  --primary-foreground: oklch(98% 0 0);
+
+  --secondary: oklch(94% 0.004 260);
+  --secondary-foreground: oklch(28% 0.012 260);
+
+  --muted: oklch(94% 0.004 260);
+  --muted-foreground: oklch(50% 0.014 260);
+
+  --accent: oklch(94% 0.004 260);
+  --accent-foreground: oklch(28% 0.012 260);
+
+  --destructive: oklch(55% 0.22 25);
+  --destructive-foreground: oklch(98% 0 0);
+
+  --border: oklch(88% 0.006 260);
+  --input: oklch(85% 0.008 260);
+  --ring: var(--primary);
+
+  --chart-1: var(--primary);
+  --chart-2: oklch(65% 0.12 240);
+  --chart-3: oklch(60% 0.13 165);
+  --chart-4: oklch(75% 0.1 70);
+  --chart-5: oklch(50% 0.18 25);
+
+  --sidebar: oklch(100% 0 0);
+  --sidebar-foreground: oklch(18% 0.01 255);
+  --sidebar-primary: var(--primary);
+  --sidebar-primary-foreground: oklch(98% 0 0);
+  --sidebar-accent: oklch(94% 0.004 260);
+  --sidebar-accent-foreground: oklch(28% 0.012 260);
+  --sidebar-border: oklch(88% 0.006 260);
+  --sidebar-ring: var(--primary);
+}
+
+/* ============================================================
+   Stripe theme — kept as an opt-in alternative
+   ============================================================ */
+
+:root[data-theme="stripe"] {
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0.04 260);
 
-  /* Cards */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0.04 260);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0.04 260);
 
-  /* Primary - Stripe Purple */
   --primary: oklch(0.52 0.26 278);
   --primary-foreground: oklch(0.985 0 0);
 
-  /* Secondary */
   --secondary: oklch(0.93 0.01 250);
   --secondary-foreground: oklch(0.30 0.04 260);
 
-  /* Muted */
   --muted: oklch(0.965 0.005 250);
   --muted-foreground: oklch(0.53 0.03 250);
 
-  /* Accent */
   --accent: oklch(0.93 0.01 250);
   --accent-foreground: oklch(0.30 0.04 260);
 
-  /* Destructive */
   --destructive: oklch(0.55 0.22 25);
   --destructive-foreground: oklch(0.985 0 0);
 
-  /* Borders & Inputs */
   --border: oklch(0.92 0.01 250);
   --input: oklch(0.92 0.01 250);
   --ring: var(--primary);
 
-  /* Border Radius - Stripe's conservative 4px base */
   --radius: 0.25rem;
 
-  /* Charts */
   --chart-1: var(--primary);
   --chart-2: oklch(0.60 0.07 260);
   --chart-3: oklch(0.40 0.12 260);
   --chart-4: oklch(0.70 0.06 145);
   --chart-5: oklch(0.55 0.22 15);
 
-  /* Sidebar */
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0.04 260);
   --sidebar-primary: var(--primary);
@@ -160,12 +260,6 @@
   --sidebar-border: oklch(0.92 0.01 250);
   --sidebar-ring: var(--primary);
 }
-
-/* ============================================================
-   Dark Mode — Stripe
-   data-mode is orthogonal to data-theme.
-   Uses Stripe's deep navy (#0d253f) as dark background.
-   ============================================================ */
 
 :root[data-theme="stripe"][data-mode="dark"] {
   --background: oklch(0.18 0.04 260);
@@ -212,20 +306,7 @@
 }
 
 /* ============================================================
-   Future themes — add :root[data-theme="linear"] { ... } etc.
-   ============================================================ */
-
-/*
-:root[data-theme="linear"] {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --primary: oklch(0.60 0.22 280);
-  --radius: 0.75rem;
-}
-*/
-
-/* ============================================================
-   Dark Mode (kept for future use; not active in Stripe theme)
+   Legacy .dark mode (kept for compatibility)
    ============================================================ */
 
 .dark {
@@ -264,8 +345,6 @@
 
 /* ============================================================
    Smooth color transitions for mode switching
-   The html element transition cascades to all color-related 
-   properties without the performance cost of * selector.
    ============================================================ */
 
 html {

@@ -6,7 +6,7 @@ import { FileText, ExternalLink } from "lucide-react";
 
 export function ResumeSection() {
   return (
-    <section id="resume" className="py-28 px-6 bg-muted/30">
+    <section id="resume" data-od-id="resume" className="py-28 px-6">
       <div className="mx-auto max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -15,11 +15,11 @@ export function ResumeSection() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-[300] tracking-tight mb-4 text-foreground">
+          <p className="text-xs font-mono tracking-[0.18em] uppercase text-primary/80 mb-4">
+            /resume
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-[300] tracking-[-0.02em] mb-4 text-foreground">
             简历
-            <span className="block text-sm font-[400] text-muted-foreground mt-2 tracking-normal">
-              Resume
-            </span>
           </h2>
           <p className="text-sm font-[300] text-muted-foreground max-w-md mx-auto mb-8">
             在线简历，包含我的教育背景、项目经历和技术能力。

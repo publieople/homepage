@@ -52,12 +52,13 @@ export default function RootLayout({
             __html: `
               (function() {
                 try {
-                  var theme = localStorage.getItem('publieople-theme') || 'stripe';
+                  var theme = localStorage.getItem('publieople-theme') || 'linear';
                   document.documentElement.dataset.theme = theme;
                   
                   var mode = localStorage.getItem('publieople-mode');
                   if (!mode) {
-                    mode = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                    // Linear is dark-native: default dark, fall back to system pref
+                    mode = (theme === 'linear' || window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
                   }
                   document.documentElement.dataset.mode = mode;
                 } catch(e) {}

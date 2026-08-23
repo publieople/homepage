@@ -51,12 +51,12 @@ function CountUp({
       ref={ref}
       className="flex items-center gap-2 text-xs text-muted-foreground/70"
     >
-      <Icon className="size-3.5 text-primary/60 shrink-0" />
+      <Icon className="size-3.5 text-primary/70 shrink-0" />
       <motion.span
         initial={{ opacity: 0, y: 8 }}
         animate={isInView ? { opacity: 1, y: 0 } : {}}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="font-[500] text-foreground/80 tabular-nums"
+        className="font-[400] text-foreground/80 tabular-nums"
       >
         {count}
         {suffix}
@@ -113,8 +113,8 @@ function TiltCard({
     const y = e.clientY - rect.top;
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
-    const rotateX = ((y - centerY) / centerY) * -8;
-    const rotateY = ((x - centerX) / centerX) * 8;
+    const rotateX = ((y - centerY) / centerY) * -6;
+    const rotateY = ((x - centerX) / centerX) * 6;
     cardRef.current.style.transform = `perspective(400px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
     cardRef.current.style.transition = "transform 0.08s ease-out";
   };
@@ -129,21 +129,11 @@ function TiltCard({
   return (
     <a href={href} target="_blank" rel="noreferrer" className="block h-full">
       <div className="group/card relative h-full">
-        {/* Neon border glow on hover */}
-        <div
-          className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover/card:opacity-100 transition-opacity duration-500"
-          style={{
-            background: "conic-gradient(from 0deg, var(--primary), transparent 40%, transparent 60%, var(--primary), transparent)",
-            animation: "neon-spin 4s linear infinite",
-            filter: "blur(4px)",
-          }}
-          aria-hidden="true"
-        />
         <div
           ref={cardRef}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
-          className="relative h-full rounded-2xl border border-border/50 bg-card p-5 cursor-pointer transition-shadow duration-300 hover:shadow-[0_0_30px_-8px] hover:shadow-primary/20"
+          className="relative h-full rounded-xl border border-border bg-card p-5 cursor-pointer transition-all duration-300 hover:border-primary/30 hover:shadow-[0_0_0_1px] hover:shadow-primary/10"
           style={{ transformStyle: "preserve-3d" }}
         >
           {children}
@@ -155,7 +145,7 @@ function TiltCard({
 
 export function About() {
   return (
-    <section id="about" className="relative py-28 px-6">
+    <section id="about" data-od-id="about" className="relative py-28 px-6">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
         <motion.div
@@ -164,11 +154,11 @@ export function About() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-3xl sm:text-4xl font-[300] tracking-tight mb-8 text-foreground">
+          <p className="text-xs font-mono tracking-[0.18em] uppercase text-primary/80 mb-4">
+            /about
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-[300] tracking-[-0.02em] mb-8 text-foreground">
             关于
-            <span className="block text-sm font-[400] text-muted-foreground mt-2 tracking-normal">
-              About
-            </span>
           </h2>
 
           <div className="space-y-6 text-base font-[300] text-muted-foreground leading-relaxed max-w-2xl">
@@ -187,7 +177,7 @@ export function About() {
                     key={fact.label}
                     className="flex items-center gap-2 text-xs text-muted-foreground/70"
                   >
-                    <fact.icon className="size-3.5 text-primary/60 shrink-0" />
+                    <fact.icon className="size-3.5 text-primary/70 shrink-0" />
                     <span className="font-[300]">{fact.label}</span>
                   </div>
                 );
@@ -216,11 +206,11 @@ export function About() {
           {highlights.map((item) => (
             <TiltCard key={item.label} href={item.href}>
               <div className="flex flex-col gap-3">
-                <div className="inline-flex size-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+                <div className="inline-flex size-10 items-center justify-center rounded-lg border border-primary/20 bg-primary/10 text-primary">
                   <item.icon className="size-5" />
                 </div>
                 <div>
-                  <h3 className="text-sm font-[500] text-foreground group-hover:text-primary transition-colors">
+                  <h3 className="text-sm font-[400] text-foreground group-hover:text-primary transition-colors">
                     {item.label}
                   </h3>
                   <p className="text-xs font-[300] text-muted-foreground leading-relaxed mt-1">

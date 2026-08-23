@@ -46,7 +46,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="relative py-28 px-6">
+    <section id="contact" data-od-id="contact" className="relative py-28 px-6">
       <div className="mx-auto max-w-4xl">
         {/* Title */}
         <motion.div
@@ -56,11 +56,11 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center"
         >
-          <h2 className="text-3xl sm:text-4xl font-[300] tracking-tight mb-2 text-foreground">
+          <p className="text-xs font-mono tracking-[0.18em] uppercase text-primary/80 mb-4">
+            /contact
+          </p>
+          <h2 className="text-3xl sm:text-4xl font-[300] tracking-[-0.02em] mb-2 text-foreground">
             联系
-            <span className="block text-sm font-[400] text-muted-foreground mt-2 tracking-normal">
-              Contact
-            </span>
           </h2>
           <p className="text-sm font-[300] text-muted-foreground/60 mt-2 max-w-md mx-auto">
             如果有任何想法、问题或合作意向，欢迎联系
@@ -82,24 +82,14 @@ export function Contact() {
               className="group flex-1 min-w-[160px] max-w-[220px]"
             >
               <div className="relative h-full">
-                {/* Neon border glow on hover */}
-                <div
-                  className="absolute -inset-[1px] rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{
-                    background: "conic-gradient(from 0deg, var(--primary), transparent 40%, transparent 60%, var(--primary), transparent)",
-                    animation: "neon-spin 4s linear infinite",
-                    filter: "blur(4px)",
-                  }}
-                  aria-hidden="true"
-                />
                 <a
                   href={link.href}
                   target="_blank"
                   rel="noreferrer"
-                className={`relative flex flex-col items-center gap-3 p-8 rounded-2xl border border-border/50 bg-card transition-all duration-300 ${link.color} hover:border-transparent hover:shadow-[0_0_30px_-8px] hover:shadow-primary/15`}
+                className={`relative flex flex-col items-center gap-3 p-8 rounded-xl border border-border bg-card transition-all duration-300 ${link.color} hover:border-primary/30 hover:shadow-[0_0_0_1px] hover:shadow-primary/10`}
               >
                 {/* Background color bleed on hover */}
-                <div className="absolute inset-0 rounded-2xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none bg-gradient-to-b from-current/5 to-transparent" />
+                <div className="absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100 pointer-events-none bg-gradient-to-b from-current/5 to-transparent" />
 
                 {/* Icon with bounce */}
                 <div className={`relative transition-all duration-300 group-hover:scale-110 group-hover:-translate-y-1 ${link.iconColor}`}>

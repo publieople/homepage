@@ -2,7 +2,7 @@
 
 import { createContext, useContext, useEffect, useState, useCallback } from "react";
 
-type Theme = "stripe" | "linear" | "vercel" | "notion";
+type Theme = "linear" | "stripe";
 type Mode = "light" | "dark";
 
 interface ThemeContextValue {
@@ -16,14 +16,17 @@ interface ThemeContextValue {
 
 const THEME_KEY = "publieople-theme";
 const MODE_KEY = "publieople-mode";
-const DEFAULT_THEME: Theme = "stripe";
+const DEFAULT_THEME: Theme = "linear";
 
 const availableThemes: { id: Theme; label: string }[] = [
+  { id: "linear", label: "Linear" },
   { id: "stripe", label: "Stripe" },
 ];
 
-function getSystemMode(): Mode {
-  if (typeof window === "undefined") return "light";
+function getSystemMode(theme: Theme = DEFAULT_THEME): Mode {
+  if (typeof window === "undefined") return theme === "linear" ? "dark" : "light";
+  // Linear is dark-native: default dark unless user/system prefers otherwise
+  if (theme === "linear") return "dark";
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 }
 
@@ -53,7 +56,7 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
 
     // Mode
     const storedMode = localStorage.getItem(MODE_KEY) as Mode | null;
-    const resolvedMode = storedMode ?? getSystemMode();
+    const resolvedMode = storedMode ?? getSystemMode(resolvedTheme);
     setModeState(resolvedMode);
     document.documentElement.dataset.mode = resolvedMode;
 

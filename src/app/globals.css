@@ -403,49 +403,8 @@ html {
   }
 }
 /* ============================================================
-   ScrollStack page-edge markers
-   Each pinned screen inside the full-page snap stack gets a thin
-   hairline + a violet glow divider at its top (Linear "page header"
-   line). DO NOT set position here — the elements keep position:sticky;
-   ::before/::after are absolutely positioned relative to the sticky
-   element itself, so no position override on the section is needed.
+   (Removed) legacy page-edge divider lines.
+   The full-page cover stack now uses StackScreen's liquid-glass title
+   bar + page number + scanning light for per-page identity, so the old
+   hairline / violet-glow ::before/::after markers are gone.
    ============================================================ */
-
-:where([data-od-id="stack"] > section)::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    var(--border) 18%,
-    var(--border) 82%,
-    transparent 100%
-  );
-  z-index: 5;
-  pointer-events: none;
-}
-
-/* Thin violet glow accent centered under the hairline */
-:where([data-od-id="stack"] > section)::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: min(240px, 44%);
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--primary) 50%,
-    transparent
-  );
-  opacity: 0.8;
-  box-shadow: 0 0 14px 0 var(--primary);
-  z-index: 6;
-  pointer-events: none;
-}

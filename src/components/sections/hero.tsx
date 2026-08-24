@@ -18,6 +18,7 @@ import { QuickerIcon } from "@/components/sections/quicker-icon";
 import { AdobePhotoshopIcon } from "@/components/sections/adobe-photoshop-icon";
 import { DotGrid } from "@/components/ui/dot-grid";
 import { AuroraBackground } from "@/components/ui/aurora-background";
+import { StackScreen } from "@/components/sections/stack-screen";
 import { MagneticButton } from "@/components/ui/magnetic-button";
 import { TypingAnimation } from "@/components/ui/typing-animation";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
@@ -55,11 +56,12 @@ export function Hero() {
   return (
     <section
       id="hero"
+      data-od-index="1"
       data-od-id="hero"
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="sticky top-0 z-10 flex h-[100dvh] items-center justify-center overflow-hidden px-6 snap-start snap-always"
+      className="sticky top-0 z-10 h-[100dvh] overflow-hidden px-6 snap-start snap-always"
     >
       {/* ── Aurora: multi-color glow blobs following the pointer ── */}
       <AuroraBackground blur={96} />
@@ -68,6 +70,7 @@ export function Hero() {
       <DotGrid spacing={30} dotSize={1.2} baseOpacity={0.07} />
 
       {/* ── Scroll-parallax content container ── */}
+      <StackScreen index={1} label="/hero">
       <motion.div
         style={{ opacity: contentOpacity, y: contentY }}
         className="relative z-10 text-center mx-auto max-w-3xl pt-24 pb-16"
@@ -301,6 +304,7 @@ export function Hero() {
           </a>
         </motion.div>
       </motion.div>
+      </StackScreen>
     </section>
   );
 }

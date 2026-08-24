@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { StackScreen } from "@/components/sections/stack-screen";
 import { BentoGrid } from "@/components/ui/bento-grid";
 import { Badge } from "@/components/ui/badge";
 import { ArrowUpRight } from "lucide-react";
@@ -34,7 +35,8 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" data-od-id="projects" className="sticky top-0 z-30 flex h-[100dvh] items-center justify-center overflow-hidden bg-background px-6 snap-start snap-always">
+    <section id="projects" data-od-index="3" data-od-id="projects" className="sticky top-0 z-30 h-[100dvh] overflow-hidden px-6 snap-start snap-always">
+      <StackScreen index={3} label="/projects" veil>
       <div className="mx-auto max-w-5xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -123,6 +125,7 @@ export function Projects() {
           ))}
         </BentoGrid>
       </div>
+      </StackScreen>
     </section>
   );
 }

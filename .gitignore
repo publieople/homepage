@@ -43,3 +43,6 @@ next-env.d.ts
 # project-specific
 .claude/
 openspec/
+
+# vision tool artifacts
+.dsh-vision-toolkit/

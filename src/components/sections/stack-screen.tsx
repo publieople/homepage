@@ -46,7 +46,7 @@ export function StackScreen({
   const isActive = index === current;
 
   return (
-    <div className={cn("relative z-10 h-full", className)}>
+    <div className={cn("relative z-10 h-full w-full", className)}>
       {veil && (
         <div
           aria-hidden="true"
@@ -100,7 +100,7 @@ export function StackScreen({
       </div>
 
       {/* ── Content layer ── */}
-      <div className="relative z-10 flex h-full items-center">{children}</div>
+      <div className="relative z-10 flex h-full w-full items-center px-6">{children}</div>
     </div>
   );
 }

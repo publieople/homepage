@@ -61,7 +61,7 @@ export function Hero() {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="sticky top-0 z-10 h-[100dvh] overflow-hidden px-6 snap-start snap-always"
+      className="sticky top-0 z-10 h-[100dvh] overflow-hidden snap-start snap-always"
     >
       {/* ── Aurora: multi-color glow blobs following the pointer ── */}
       <AuroraBackground blur={96} />

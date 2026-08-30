@@ -2,11 +2,12 @@
 
 import { useState, useRef } from "react";
 import { cn } from "@/lib/utils";
-import { motion, useScroll } from "framer-motion";
+import { motion, AnimatePresence, useScroll } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Menu, X } from "lucide-react";
+import { useActiveSection } from "@/hooks/use-active-section";
 
 const navItems = [
   { label: "关于", href: "#about" },
@@ -20,6 +21,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const active = useActiveSection();
 
   // Use framer-motion's useScroll instead of window.addEventListener("scroll")
   // Taste Skill Section 5.D: window.addEventListener("scroll") is banned
@@ -48,13 +50,25 @@ export function Header() {
           : "bg-transparent"
       )}
     >
-      <div className="mx-auto max-w-6xl flex items-center justify-between px-6 h-16">
-        {/* Logo */}
+      <div className="flex w-full items-center justify-between px-4 sm:px-6 h-16">
+        {/* Section indicator — frosted-glass pill, current page slug.
+            Enter/exit both dissolve through a frosted-glass blur. */}
         <a
           href="#"
-          className="text-sm font-medium tracking-tight text-foreground/80 hover:text-foreground transition-colors"
+          className="font-mono text-[11px] tracking-[0.22em] uppercase text-foreground"
         >
-          Publieople
+          <AnimatePresence mode="wait" initial={false}>
+            <motion.span
+              key={active}
+              initial={{ opacity: 0, filter: "blur(6px)" }}
+              animate={{ opacity: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, filter: "blur(6px)" }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="inline-block leading-none"
+            >
+              /{active}
+            </motion.span>
+          </AnimatePresence>
         </a>
 
         {/* Desktop nav */}

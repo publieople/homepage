@@ -9,7 +9,6 @@ import { Blog } from "@/components/sections/blog";
 import { ResumeSection } from "@/components/sections/resume-section";
 import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
-import { SectionNav } from "@/components/sections/section-nav";
 import { ScrollStack } from "@/components/sections/scroll-stack";
 
 const SECTION_VARIANTS = {
@@ -72,7 +71,6 @@ export default function Home() {
           <Contact />
         </SectionWrapper>
       </main>
-      <SectionNav />
       <Footer />
     </>
   );

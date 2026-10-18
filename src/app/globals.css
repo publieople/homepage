@@ -430,7 +430,10 @@ html {
 }
 
 @media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
-  html[data-snap="on"] {
+  /* :has(.snap-screen) keeps snap off sub-pages (/resume/) that share
+     the layout — without it the lone footer snap point dragged those
+     pages to the bottom on load. */
+  html[data-snap="on"]:has(.snap-screen) {
     scroll-snap-type: y mandatory;
     scroll-behavior: smooth;
   }
@@ -451,7 +454,7 @@ html {
     top: 0;
   }
 
-  html[data-snap="on"] footer {
+  html[data-snap="on"]:has(.snap-screen) footer {
     scroll-snap-align: end;
   }
 }

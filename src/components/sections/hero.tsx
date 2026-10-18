@@ -61,7 +61,7 @@ export function Hero() {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="sticky top-0 z-10 h-[100dvh] overflow-hidden snap-start snap-always"
+      className="z-10 relative min-h-[100dvh] md:sticky md:top-0 md:h-[100dvh] md:overflow-hidden md:snap-start md:snap-always"
     >
       {/* ── Aurora: multi-color glow blobs following the pointer ── */}
       <AuroraBackground blur={96} />
@@ -95,7 +95,7 @@ export function Hero() {
           <div className="relative size-24 flex items-center justify-center mx-auto">
             {/* Orbiting tech stack with subtle mouse parallax */}
             <div
-              className="absolute pointer-events-none"
+              className="absolute pointer-events-none origin-center scale-[0.5] sm:scale-[0.8] md:scale-100"
               style={{
                 left: "calc(50% - 16px)",
                 top: "calc(50% - 16px)",
@@ -237,7 +237,7 @@ export function Hero() {
         >
           <TypingAnimation
             className="mt-6 text-base sm:text-lg font-[300] text-muted-foreground leading-relaxed mx-auto block text-center"
-            words={["大学生", "内容创作者", "Vibe Coder"]}
+            words={["大学生", "内容创作者", "AI 工具链开发者", "Vibe Coder"]}
             duration={120}
             pauseDelay={2000}
             loop={true}

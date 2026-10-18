@@ -4,12 +4,12 @@ import { useRef, useState, useEffect } from "react";
 import { motion, useInView } from "framer-motion";
 import { StackScreen } from "@/components/sections/stack-screen";
 import {
-  Sparkles,
   BookOpen,
   Users,
   GraduationCap,
   MapPin,
-  Heart,
+  GitBranch,
+  Puzzle,
   Terminal,
   Rocket,
 } from "lucide-react";
@@ -69,11 +69,11 @@ function CountUp({
 
 /* ---- Facts with animated counters ---- */
 const facts = [
-  { icon: Sparkles, value: 19, suffix: "岁", label: "" },
-  { icon: MapPin, value: 0, suffix: "", label: "中国", static: true },
-  { icon: GraduationCap, value: 0, suffix: "", label: "大学生", static: true },
+  { icon: GraduationCap, value: 0, suffix: "", label: "2024 级 · 人工智能本科", static: true },
+  { icon: MapPin, value: 0, suffix: "", label: "上海", static: true },
   { icon: BookOpen, value: 20, suffix: "+", label: "文章" },
   { icon: Users, value: 8, suffix: "人", label: "团队" },
+  { icon: GitBranch, value: 49, suffix: "", label: "公开仓库" },
 ];
 
 /* ---- Highlights with Tilt ---- */
@@ -81,20 +81,20 @@ const highlights = [
   {
     icon: Rocket,
     label: "通识分享企划",
-    desc: "非盈利内容企划，8人团队，每两周一篇深度文章",
+    desc: "非盈利内容企划，8 人团队，每两周一篇深度文章",
     href: "https://blog.for-people.cn/",
   },
   {
     icon: Terminal,
-    label: "电脑高手速成班",
-    desc: "结构化技术教程，让新手也能成为高手",
-    href: "https://www.notion.so/1a966ad7c9c483cf839081223d50a9fd",
+    label: "终端服务部 · 实验室",
+    desc: "管 4×A10 推理集群，写「终端基础 + Web 全栈」培训课与部门知识库",
+    href: "https://publieople.github.io/lab-terminal-service/",
   },
   {
-    icon: Heart,
-    label: "Vibe Coding",
-    desc: "用 AI 辅助开发的实践者，追求效率与实用",
-    href: "https://github.com/publieople",
+    icon: Puzzle,
+    label: "DSH 插件生态",
+    desc: "给 DeepSeek Harness 写自动更新、离屏渲染、模型管理与去噪注册表",
+    href: "https://dsh.works/awesome-dsh-plugins/",
   },
 ];
 
@@ -146,7 +146,7 @@ function TiltCard({
 
 export function About() {
   return (
-    <section id="about" data-od-index="2" data-od-id="about" className="sticky top-0 z-20 h-[100dvh] overflow-hidden snap-start snap-always">
+    <section id="about" data-od-index="2" data-od-id="about" className="z-20 relative min-h-[100dvh] md:sticky md:top-0 md:h-[100dvh] md:overflow-hidden md:snap-start md:snap-always">
       <StackScreen index={2} label="/about" veil>
       <div className="mx-auto max-w-4xl">
         {/* Title */}
@@ -164,10 +164,7 @@ export function About() {
           </h2>
 
           <div className="space-y-6 text-base font-[300] text-muted-foreground leading-relaxed max-w-2xl">
-            <p>
-              你好，我是人民公仆（Publieople），一名大学生。我相信好的内容和技术应当是每个人都能
-              触及的，这也是我做一切事情的出发点。
-            </p>
+            <p>你好，我是人民公仆（Publieople），一名人工智能专业的大学生。我相信好的内容和技术应当是每个人都能触及的，这也是我做一切事情的出发点。现在主要在折腾 AI 工具链、智能体应用和自动化效率，把踩过的坑写成教程，也写成开源项目。</p>
           </div>
 
           {/* Animated facts bar — no emoji */}

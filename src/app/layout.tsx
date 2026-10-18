@@ -22,16 +22,36 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const DESCRIPTION =
+  "AI 工具链 · 智能体应用 · 自动化效率。DeepSeek Harness 插件作者、通识分享企划主理人，记录技术探索与效率实践。";
+
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.for-people.cn"),
   title: "人民公仆 | Publieople",
-  description:
-    "大学生 · 内容创作者 · Vibe Coder。通识分享企划创始人，电脑高手速成班作者。",
+  description: DESCRIPTION,
+  keywords: [
+    "人民公仆",
+    "Publieople",
+    "AI 工具链",
+    "智能体",
+    "DeepSeek Harness",
+    "自动化效率",
+    "技术博客",
+  ],
+  authors: [{ name: "人民公仆 / Publieople", url: "https://www.for-people.cn" }],
+  alternates: { canonical: "https://www.for-people.cn/" },
   openGraph: {
     title: "人民公仆 | Publieople",
-    description:
-      "大学生 · 内容创作者 · Vibe Coder。通识分享企划创始人，电脑高手速成班作者。",
+    description: DESCRIPTION,
     type: "website",
     locale: "zh_CN",
+    url: "https://www.for-people.cn/",
+    siteName: "人民公仆 / Publieople",
+  },
+  twitter: {
+    card: "summary",
+    title: "人民公仆 | Publieople",
+    description: DESCRIPTION,
   },
 };
 

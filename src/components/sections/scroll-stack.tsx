@@ -37,7 +37,9 @@ export function ScrollStack({
       // their *rendered* position in Chrome, which corrupts the comparison.
       // Every screen is one viewport tall (100dvh), so the covering screen is
       // floor(scrollY - stackTop) / screenHeight) + 1.
-      const kids = Array.from(el.children) as HTMLElement[];
+      const kids = Array.from(
+        el.querySelectorAll<HTMLElement>(":scope > .snap-screen"),
+      );
       if (window.innerWidth < 768) {
         const mid = window.innerHeight / 2;
         let active = 1;
@@ -76,6 +78,20 @@ export function ScrollStack({
       style={{ "--snap-screens": height } as CSSProperties}
       aria-label="Sections"
     >
+      {/* Invisible, non-sticky snap targets. Sticky screens all collapse onto
+          the same visual position once pinned, and Chrome computes their snap
+          areas from that position — scrolling back up then had nothing to
+          catch (the three stack screens merged into one snap point). These
+          1px markers sit in the stack's own layout flow instead. */}
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        {Array.from({ length: height }).map((_, i) => (
+          <span
+            key={i}
+            className="snap-marker"
+            style={{ top: `${(i * 100) / height}%` }}
+          />
+        ))}
+      </div>
       <StackIndexContext.Provider value={current}>
         {children}
       </StackIndexContext.Provider>

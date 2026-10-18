@@ -54,6 +54,7 @@ src/
 - Section transitions: About (fade-up), Projects (slide-left), Blog (slide-right), Contact (scale-in)
 - Snapping: each section is `.snap-screen` (100dvh, `scroll-snap-align: start`); the hero/about/projects stack is `.snap-stack` with height = 3 × 100dvh. Never add snapping to a `div` — the scroll container is `documentElement`
 - SnapGuard (mounted in `page.tsx`) switches snapping off automatically when any `.snap-screen` overflows its viewport, so short screens never clip content
+- Inside `.snap-stack` the snap points come from invisible `.snap-marker` spans (one per screen, parked at `i / height`%), **not** from the screens themselves: the three screens are `position: sticky`, and once pinned they all report the same visual position, so their snap areas collapse into one and scrolling up cannot return through them. Do not re-add `scroll-snap-align` to stack screens.
 - Each section uses `#<section-id>` anchors for SectionNav
 - Contact icon sourcing priority: (1) @lobehub/icons, (2) @icons-pack/react-simple-icons, (3) official SVG, (4) lucide
 

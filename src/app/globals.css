@@ -423,6 +423,16 @@ html {
   position: relative;
 }
 
+/* Invisible snap target used by the sticky stack (see globals snap block). */
+.snap-marker {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
 @media (min-width: 768px) {
   .snap-screen {
     min-height: 100dvh;
@@ -452,6 +462,17 @@ html {
   html[data-snap="on"] .snap-stack > .snap-screen {
     position: sticky;
     top: 0;
+    /* Snap points inside the stack come from .snap-marker, not from the
+       sticky screens: once pinned, every screen reports the same visual
+       position, so their snap areas collapsed into one and scrolling up
+       could not return to the earlier screens. */
+    scroll-snap-align: none;
+  }
+
+  /* Non-sticky snap targets: one per stack screen, parked at 0 / 100% / 200%. */
+  html[data-snap="on"] .snap-marker {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   html[data-snap="on"]:has(.snap-screen) footer {

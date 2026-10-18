@@ -51,7 +51,7 @@ export function StackScreen({ veil = false, className, children }: StackScreenPr
       )}
 
       {/* ── Content layer ── */}
-      <div className="relative z-10 flex h-full w-full items-center px-6">{children}</div>
+      <div className="relative z-10 flex w-full items-center px-6 py-20 md:h-full md:py-0">{children}</div>
     </div>
   );
 }

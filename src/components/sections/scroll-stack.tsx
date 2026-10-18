@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import { cn } from "@/lib/utils";
 import { StackIndexContext } from "@/components/sections/stack-screen";
 
@@ -44,6 +44,18 @@ export function ScrollStack({
       // (100dvh), so the covering screen index is floor((scrollY - stackTop) /
       // sectionHeight) + 1, clamped between 1 and the number of screens.
       const kids = Array.from(el.children) as HTMLElement[];
+      // Below the md breakpoint the screens flow normally (auto height), so the
+      // fixed-height math below does not apply: pick the screen straddling the
+      // viewport midpoint instead.
+      if (window.innerWidth < 768) {
+        const mid = window.innerHeight / 2;
+        let active = 1;
+        kids.forEach((kid, i) => {
+          if (kid.getBoundingClientRect().top <= mid) active = i + 1;
+        });
+        setCurrent(Math.min(kids.length, active));
+        return;
+      }
       const stackDocTop = el.getBoundingClientRect().top + window.scrollY;
       const sectionHeight = kids[0]?.offsetHeight || window.innerHeight;
       const y = window.scrollY;
@@ -68,8 +80,8 @@ export function ScrollStack({
       ref={sectionRef}
       data-od-id="stack"
       data-active={current}
-      className={cn("relative snap-y snap-mandatory", className)}
-      style={{ height: `${height}dvh` }}
+      className={cn("relative h-auto md:h-[var(--stack-h)] md:snap-y md:snap-mandatory", className)}
+      style={{ "--stack-h": `${height}dvh` } as CSSProperties}
       aria-label="Sections"
     >
       <StackIndexContext.Provider value={current}>

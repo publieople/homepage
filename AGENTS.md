@@ -30,7 +30,7 @@ src/
 | Section | Status | Key Features |
 |---------|--------|-------------|
 | **Hero** | ✅ Done | Particles, OrbitingCircles (x2 rings), TypingAnimation, parallax fade-out on scroll, 3D orbit mouse tilt |
-| **About** | ✅ Done | Lucide icons, 3D Tilt cards, animated counters (0→19, 0→20+, 0→8) |
+| **About** | ✅ Done | Lucide icons, 3D Tilt cards, animated counters (20+ 文章 / 8 人团队 / 49 仓库) |
 | **Projects** | ✅ Done | BentoGrid layout, hover effects |
 | **Blog** | ✅ Done | Horizontal scroll-snap cards, reading time indicators |
 | **Resume** | ✅ Done | Link to external resume |
@@ -54,10 +54,15 @@ src/
 - Contact icon sourcing priority: (1) @lobehub/icons, (2) @icons-pack/react-simple-icons, (3) official SVG, (4) lucide
 
 ## Pending / Roadmap
+- **OG image**：目前没有 `og:image`，分享到微信/X 时无预览图（需要一个 1200×630 静态图放 `public/og.png`）
+- **apex 域名**：`https://for-people.cn` 无证书（Pages 证书只签 `www`）；要么在 Cloudflare 做 301 → www，要么把 apex 加到 Pages 自定义域名
 - Projects: add image preview hover on cards
 - Live data integration (GitHub stars, blog count)
 - Notion → Blog sync pipeline
 - Additional theme (Linear?)
+
+## Maintenance Map
+内容改哪里见 `README.md` 的「内容维护」表。改完 `git push` 到 `main` 即触发 Actions 自动发布（约 1–2 分钟）。
 
 ## Commands
 - `npm run dev` — Development server (localhost:3000)

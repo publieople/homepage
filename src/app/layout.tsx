@@ -47,12 +47,50 @@ export const metadata: Metadata = {
     locale: "zh_CN",
     url: "https://www.for-people.cn/",
     siteName: "人民公仆 / Publieople",
+    images: [
+      {
+        url: "/og.png",
+        width: 1200,
+        height: 630,
+        alt: "人民公仆 · Publieople",
+      },
+    ],
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "人民公仆 | Publieople",
     description: DESCRIPTION,
+    images: ["/og.png"],
   },
+};
+
+const PERSON_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "冯周杰",
+  alternateName: ["人民公仆", "Publieople", "publieople"],
+  url: "https://www.for-people.cn/",
+  image: "https://www.for-people.cn/avatar.webp",
+  jobTitle: "AI 工具链开发与智能体应用 · 自动化效率工程师",
+  description: DESCRIPTION,
+  email: "mailto:publieople@outlook.com",
+  sameAs: [
+    "https://github.com/publieople",
+    "https://blog.for-people.cn/",
+    "https://space.bilibili.com/324858924",
+    "https://www.zhihu.com/people/2631792752",
+  ],
+  alumniOf: {
+    "@type": "CollegeOrUniversity",
+    name: "上海中侨职业技术大学",
+  },
+  knowsAbout: [
+    "AI Agent",
+    "DeepSeek Harness",
+    "TypeScript",
+    "Next.js",
+    "自动化效率",
+  ],
 };
 
 export default function RootLayout({
@@ -64,6 +102,7 @@ export default function RootLayout({
     <html
       lang="zh-CN"
       suppressHydrationWarning
+      data-snap="on"
       className={`${archivo.variable} ${spaceGrotesk.variable} ${geistMono.variable}`}
     >
       <head>
@@ -88,6 +127,10 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen font-sans antialiased">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(PERSON_JSON_LD) }}
+        />
         <ThemeProvider>
           <ScrollProgress className="top-[65px]" />
           <NoiseOverlay opacity={0.018} />

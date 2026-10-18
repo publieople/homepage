@@ -37,7 +37,10 @@
 | 精选文章（3 篇 + 阅读时长） | `src/components/sections/blog.tsx` |
 | 联系方式 / 社交链接 | `src/components/sections/contact.tsx` |
 | 页面标题、SEO 描述、OG 信息 | `src/app/layout.tsx` |
-| 头像 | `public/avatar.jpg` |
+| 简历摘要（教育/经历/技能/奖项） | `src/components/sections/resume-section.tsx` |
+| 站内简历页全文 | `src/app/resume/page.tsx` |
+| 头像 | `public/avatar.webp` |
+| 站点图标 / 分享图 | `public/logo.svg`（矢量源）、`public/og.png`（1200×630）、`src/app/icon.png`、`src/app/apple-icon.png`、`src/app/favicon.ico` |
 | robots / sitemap | `public/robots.txt`、`public/sitemap.xml` |
 
 ## 快速开始

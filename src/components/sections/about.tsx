@@ -146,7 +146,7 @@ function TiltCard({
 
 export function About() {
   return (
-    <section id="about" data-od-index="2" data-od-id="about" className="z-20 relative min-h-[100dvh] md:sticky md:top-0 md:h-[100dvh] md:overflow-hidden md:snap-start md:snap-always">
+    <section id="about" data-od-index="2" data-od-id="about" className="snap-screen z-20 min-h-[100dvh]">
       <StackScreen index={2} label="/about" veil>
       <div className="mx-auto max-w-4xl">
         {/* Title */}

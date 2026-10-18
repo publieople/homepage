@@ -11,6 +11,7 @@ import { Contact } from "@/components/sections/contact";
 import { Footer } from "@/components/sections/footer";
 import { ScrollStack } from "@/components/sections/scroll-stack";
 import { SectionNav } from "@/components/sections/section-nav";
+import { SnapGuard } from "@/components/snap-guard";
 
 const SECTION_VARIANTS = {
   blog: {
@@ -52,16 +53,17 @@ function SectionWrapper({
 export default function Home() {
   return (
     <>
+      <SnapGuard />
       <Header />
       <main>
-        {/* Full-page snap stack: Hero → About → Projects (pinned, overlapping covers) */}
-        <ScrollStack height={300}>
+        {/* Screens 01–03: sticky cover stack (hero → about → projects) */}
+        <ScrollStack height={3}>
           <Hero />
           <About />
           <Projects />
         </ScrollStack>
 
-        {/* Remaining sections flow normally */}
+        {/* Screens 04–06: full-viewport sections, same snap rhythm */}
         <SectionWrapper variants={SECTION_VARIANTS.blog}>
           <Blog />
         </SectionWrapper>

@@ -403,6 +403,60 @@ html {
   }
 }
 /* ============================================================
+   Full-page snap — desktop only
+   ------------------------------------------------------------
+   The document (<html>) is the scroll container here, so
+   scroll-snap-type has to live on html — putting it on a wrapper
+   with overflow:visible does nothing (that was the bug: snap was
+   declared on .stack, which never scrolls).
+
+   .snap-screen  — one full-viewport screen (min-height fallback).
+   .snap-stack   — the first three screens, sticky "cover" layers.
+   SnapGuard     — sets html[data-snap="off"] when any screen is
+                   taller than the viewport (short windows, zoomed
+                   text, touch devices), which restores normal
+                   scrolling and un-pins the stack. Content can
+                   therefore never be trapped behind mandatory snap.
+   ============================================================ */
+
+.snap-screen {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .snap-screen {
+    min-height: 100dvh;
+  }
+}
+
+@media (min-width: 768px) and (prefers-reduced-motion: no-preference) {
+  html[data-snap="on"] {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+
+  html[data-snap="on"] .snap-stack {
+    height: calc(var(--snap-screens, 3) * 100dvh);
+  }
+
+  html[data-snap="on"] .snap-screen {
+    height: 100dvh;
+    overflow: hidden;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+
+  html[data-snap="on"] .snap-stack > .snap-screen {
+    position: sticky;
+    top: 0;
+  }
+
+  html[data-snap="on"] footer {
+    scroll-snap-align: end;
+  }
+}
+
+/* ============================================================
    (Removed) legacy page-edge divider lines.
    The full-page cover stack now uses StackScreen's liquid-glass title
    bar + page number + scanning light for per-page identity, so the old

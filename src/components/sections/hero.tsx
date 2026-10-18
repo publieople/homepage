@@ -61,7 +61,7 @@ export function Hero() {
       ref={sectionRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className="z-10 relative min-h-[100dvh] md:sticky md:top-0 md:h-[100dvh] md:overflow-hidden md:snap-start md:snap-always"
+      className="snap-screen z-10 min-h-[100dvh]"
     >
       {/* ── Aurora: multi-color glow blobs following the pointer ── */}
       <AuroraBackground blur={96} />
@@ -80,7 +80,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-xs sm:text-sm text-primary/90 font-mono tracking-[0.18em] uppercase mb-8"
+          className="relative z-20 text-xs sm:text-sm text-primary/90 font-mono tracking-[0.18em] uppercase mb-8 [text-shadow:0_0_14px_var(--background),0_0_8px_var(--background)]"
         >
           /publieople/
         </motion.p>
@@ -94,13 +94,23 @@ export function Hero() {
         >
           <div className="relative size-24 flex items-center justify-center mx-auto">
             {/* Orbiting tech stack with subtle mouse parallax */}
+            {/* Mask lives on a *sized* wrapper: on the old zero-width
+                origin box mask-image resolved to a 0x0 area and hid the
+                whole orbit. The fade dissolves icons before the title. */}
             <div
-              className="absolute pointer-events-none origin-center scale-[0.5] sm:scale-[0.8] md:scale-100"
+              aria-hidden
+              className="absolute left-1/2 top-1/2 size-[480px] -translate-x-1/2 -translate-y-1/2 pointer-events-none origin-center scale-[0.5] sm:scale-[0.78] md:scale-[0.92]"
               style={{
-                left: "calc(50% - 16px)",
-                top: "calc(50% - 16px)",
+                maskImage:
+                  "linear-gradient(to bottom, #000 0%, #000 54%, transparent 76%)",
+                WebkitMaskImage:
+                  "linear-gradient(to bottom, #000 0%, #000 54%, transparent 76%)",
               }}
             >
+              <div
+                className="absolute left-1/2 top-1/2 size-0"
+                style={{ transform: "translate(-16px, -16px)" }}
+              >
               {/* Outer layer: very gentle mouse-driven wobble */}
               <motion.div
                 className="relative w-0 h-0"
@@ -137,7 +147,7 @@ export function Hero() {
                   />
 
                   <OrbitingCircles
-                    radius={140}
+                    radius={134}
                     duration={20}
                     speed={1.2}
                     path={false}
@@ -170,7 +180,7 @@ export function Hero() {
                   />
 
                   <OrbitingCircles
-                    radius={220}
+                    radius={208}
                     duration={28}
                     reverse
                     speed={0.8}
@@ -191,6 +201,7 @@ export function Hero() {
                   </OrbitingCircles>
                 </div>
               </motion.div>
+              </div>
             </div>
 
             {/* Avatar — hover spring + glow ring */}
@@ -200,7 +211,7 @@ export function Hero() {
               className="relative"
             >
               <Avatar className="size-24 ring-1 ring-border ring-offset-4 ring-offset-background transition-shadow duration-300 hover:ring-primary/40 hover:shadow-[0_0_40px_-5px] hover:shadow-primary/30">
-                <AvatarImage src="/avatar.jpg" alt="人民公仆" />
+                <AvatarImage src="/avatar.webp" alt="人民公仆" />
                 <AvatarFallback>PP</AvatarFallback>
               </Avatar>
             </motion.div>

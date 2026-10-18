@@ -56,7 +56,7 @@ const projects = [
 
 export function Projects() {
   return (
-    <section id="projects" data-od-index="3" data-od-id="projects" className="z-30 relative min-h-[100dvh] md:sticky md:top-0 md:h-[100dvh] md:overflow-hidden md:snap-start md:snap-always">
+    <section id="projects" data-od-index="3" data-od-id="projects" className="snap-screen z-30 min-h-[100dvh]">
       <StackScreen index={3} label="/projects" veil>
       <div className="mx-auto max-w-5xl">
         <motion.div

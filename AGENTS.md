@@ -33,9 +33,11 @@ src/
 | **About** | ✅ Done | Lucide icons, 3D Tilt cards, animated counters (20+ 文章 / 8 人团队 / 49 仓库) |
 | **Projects** | ✅ Done | BentoGrid layout, hover effects |
 | **Blog** | ✅ Done | Horizontal scroll-snap cards, reading time indicators |
-| **Resume** | ✅ Done | Link to external resume |
+| **Resume** | ✅ Done | 4-card summary + in-site page `/resume/`, external classic resume link |
 | **Contact** | ✅ Done | Big cards, icon bouncing, brand color bleed, SiBilibili, SiGithub |
 | **SectionNav** | ✅ Done | Right-side nav with IntersectionObserver active tracking |
+| **Scroll snap** | ✅ Done | Six screens, CSS-only `scroll-snap-type: y mandatory` on `html[data-snap=on]`; `SnapGuard` turns it off when content overflows or viewport < 768px |
+| **Favicon / OG** | ✅ Done | `logo.svg` + generated png/ico set, `public/og.png` 1200×630 |
 | **Theme Toggle** | ✅ Done | Dark/light mode, view-transition clip animation |
 
 ## Deployment
@@ -50,11 +52,12 @@ src/
 - **Prioritize motion/interaction** over static decoration (user values: MagicCard tilt, TypingAnimation, 打字机, scroll-parallax = 惊艳; static visual tweaks = 看不出什么)
 - **Prefer magicui components** over custom CSS for effects
 - Section transitions: About (fade-up), Projects (slide-left), Blog (slide-right), Contact (scale-in)
+- Snapping: each section is `.snap-screen` (100dvh, `scroll-snap-align: start`); the hero/about/projects stack is `.snap-stack` with height = 3 × 100dvh. Never add snapping to a `div` — the scroll container is `documentElement`
+- SnapGuard (mounted in `page.tsx`) switches snapping off automatically when any `.snap-screen` overflows its viewport, so short screens never clip content
 - Each section uses `#<section-id>` anchors for SectionNav
 - Contact icon sourcing priority: (1) @lobehub/icons, (2) @icons-pack/react-simple-icons, (3) official SVG, (4) lucide
 
 ## Pending / Roadmap
-- **OG image**：目前没有 `og:image`，分享到微信/X 时无预览图（需要一个 1200×630 静态图放 `public/og.png`）
 - **apex 域名**：`https://for-people.cn` 无证书（Pages 证书只签 `www`）；要么在 Cloudflare 做 301 → www，要么把 apex 加到 Pages 自定义域名
 - Projects: add image preview hover on cards
 - Live data integration (GitHub stars, blog count)

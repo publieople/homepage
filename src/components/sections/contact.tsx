@@ -46,7 +46,11 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" data-od-id="contact" className="relative py-28 px-6 scroll-mt-20">
+    <section
+      id="contact"
+      data-od-id="contact"
+      className="snap-screen relative flex flex-col justify-center px-6 py-24 md:py-0"
+    >
       <div className="mx-auto max-w-4xl">
         {/* Title */}
         <motion.div
@@ -119,7 +123,7 @@ export function Contact() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="relative mt-20 text-center"
+          className="relative mt-16 text-center"
         >
           <p className="text-[10px] font-[300] text-muted-foreground/30">
             基于 Next.js + Tailwind CSS 用心构建

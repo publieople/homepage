@@ -5,27 +5,23 @@ import { cn } from "@/lib/utils";
 import { StackIndexContext } from "@/components/sections/stack-screen";
 
 export interface ScrollStackProps extends React.HTMLAttributes<HTMLElement> {
-  /** Total viewport height (in dvh) for the stack. */
+  /** Number of full-viewport screens inside the stack. */
   height?: number;
   children: React.ReactNode;
 }
 
 /**
- * ScrollStack — full-page snap + sticky stacking.
+ * ScrollStack — the sticky "cover" group of the first screens.
  *
- * Wraps N full-screen children and makes each a sticky pinned layer that the
- * next one slides up to cover. The container uses CSS scroll-snap (y mandatory)
- * so each screen locks to the viewport; children carry their own
- * `sticky top-0 h-[100dvh] z-[i] snap-start` classes (set in each section).
+ * Height, sticky pinning and scroll-snap all live in globals.css under
+ * `html[data-snap="on"]`, because the document is the real scroll container:
+ * snap declared on this wrapper (overflow: visible) silently did nothing.
  *
- * The current covering screen index is derived from each child's document
- * offsetTop vs. window scrollY (a child is "active" once its top edge has
- * sticky-pinned at the viewport top), and is provided to every StackScreen
- * through StackIndexContext. This is robust even when a covered page still
- * occupies the viewport geometrically.
+ * The covering screen index is derived from scroll geometry and published on
+ * the element as data-active; StackScreen and useActiveSection read it.
  */
 export function ScrollStack({
-  height = 300,
+  height = 3,
   className,
   children,
 }: ScrollStackProps) {
@@ -38,15 +34,10 @@ export function ScrollStack({
 
     const compute = () => {
       // NOTE: do NOT use each section's offsetTop here — sticky elements report
-      // their *rendered* position in Chrome (e.g. hero's offsetTop jumps 0→900
-      // once it pins), which corrupts the comparison. Instead derive the active
-      // screen purely from scroll geometry: every screen is a full viewport
-      // (100dvh), so the covering screen index is floor((scrollY - stackTop) /
-      // sectionHeight) + 1, clamped between 1 and the number of screens.
+      // their *rendered* position in Chrome, which corrupts the comparison.
+      // Every screen is one viewport tall (100dvh), so the covering screen is
+      // floor(scrollY - stackTop) / screenHeight) + 1.
       const kids = Array.from(el.children) as HTMLElement[];
-      // Below the md breakpoint the screens flow normally (auto height), so the
-      // fixed-height math below does not apply: pick the screen straddling the
-      // viewport midpoint instead.
       if (window.innerWidth < 768) {
         const mid = window.innerHeight / 2;
         let active = 1;
@@ -60,17 +51,18 @@ export function ScrollStack({
       const sectionHeight = kids[0]?.offsetHeight || window.innerHeight;
       const y = window.scrollY;
       const raw = Math.floor((y - stackDocTop) / sectionHeight) + 1;
-      const active = Math.min(kids.length, Math.max(1, raw));
-      setCurrent(active);
+      setCurrent(Math.min(kids.length, Math.max(1, raw)));
     };
 
     compute();
     window.addEventListener("scroll", compute, { passive: true });
     window.addEventListener("resize", compute);
+    window.addEventListener("snapguard:change", compute);
     const t = window.setTimeout(compute, 250);
     return () => {
       window.removeEventListener("scroll", compute);
       window.removeEventListener("resize", compute);
+      window.removeEventListener("snapguard:change", compute);
       window.clearTimeout(t);
     };
   }, [children]);
@@ -80,8 +72,8 @@ export function ScrollStack({
       ref={sectionRef}
       data-od-id="stack"
       data-active={current}
-      className={cn("relative h-auto md:h-[var(--stack-h)] md:snap-y md:snap-mandatory", className)}
-      style={{ "--stack-h": `${height}dvh` } as CSSProperties}
+      className={cn("snap-stack relative", className)}
+      style={{ "--snap-screens": height } as CSSProperties}
       aria-label="Sections"
     >
       <StackIndexContext.Provider value={current}>

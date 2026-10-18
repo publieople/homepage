@@ -112,8 +112,12 @@ export function Blog() {
   const sectionRef = useRef<HTMLDivElement>(null);
 
   return (
-    <section id="blog" data-od-id="blog" className="relative py-28 scroll-mt-20">
-      <div className="mx-auto max-w-6xl px-6">
+    <section
+      id="blog"
+      data-od-id="blog"
+      className="snap-screen relative flex flex-col justify-center py-24 md:py-0"
+    >
+      <div className="mx-auto w-full max-w-6xl px-6">
         {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
